@@ -1,0 +1,73 @@
+---
+title: "Shapefile"
+author: "Chang Xu"
+date: "10/17/2019"
+output: html_notebook
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(error = TRUE)
+knitr::opts_chunk$set(cache = F)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+options(mc.cores = parallel::detectCores())
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(raster)
+library(rgdal)
+library(tmap)
+library(geojsonio)
+library(geojsonR)
+library(sp)
+library(leaflet)
+library(ggmap)
+library(crosstalk)
+library(RColorBrewer)
+```
+
+# MN
+```{r}
+# load data
+eds_mn <- readOGR(dsn = "Data/eds", layer = "Manhattan_1910")
+lines_mn <- readOGR(dsn = "Data/lines", layer = "centerlines_MN_20190612")
+```
+
+```{r, fig.width = 15, fig.height = 30}
+# load map
+tmap_mode("plot")
+tm_shape(eds_mn) + 
+  tm_borders(col = "red", alpha = 1, lwd = 3, lty = 4) +
+tm_shape(lines_mn) + 
+  tm_lines(col = "blue", lwd = 1) 
+```
+
+
+# BK
+```{r}
+eds_bk <- readOGR(dsn = "Data/eds", layer = "Brooklyn_1910")
+lines_bk <- readOGR(dsn = "Data/lines", layer = "centerlines_BK_20190612")
+```
+
+```{r, fig.width = 15, fig.height = 30}
+# load map
+tmap_mode("plot")
+tm_shape(eds_bk) + 
+  tm_borders(col = "red", alpha = 1, lwd = 3, lty = 4) +
+tm_shape(lines_bk) + 
+  tm_lines(col = "blue", lwd = 1) 
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+

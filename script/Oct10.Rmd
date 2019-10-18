@@ -1,5 +1,5 @@
 ---
-title: "Oct10"
+title: "Clean Dataset"
 author: "Chang Xu"
 date: "10/10/2019"
 output: html_notebook
@@ -28,12 +28,12 @@ library(compare)
 
 ```{r}
 # load data
-morse_mn1910<-read_csv("MN_MORSE_EDstreet_dict_1910.csv") 
-mn_original<-read_csv("MN_EDDictionary.csv") %>% select(-X1)
+morse_mn1910<-read_csv("Data/MN_MORSE_EDstreet_dict_1910.csv") 
+mn_original<-read_csv("Data/MN_EDDictionary.csv") %>% select(-X1)
 ```
 ```{r}
-morse_bk1910<-read_csv("BK_MORSE_EDstreet_dict_1910.csv")
-bk_original<-read_xlsx("BK_EDDictionary.xlsx")
+morse_bk1910<-read_csv("Data/BK_MORSE_EDstreet_dict_1910.csv")
+bk_original<-read_xlsx("Data/BK_EDDictionary.xlsx")
 ```
 
 ```{r}
@@ -45,7 +45,7 @@ morse_bk1910$ED<-as.numeric(as.character(morse_bk1910$ED))
 
 ## clean strings
 ```{r}
-
+# clean data
 str_clean_streets<-function(x){
   x<-gsub("\\<SRT\\>$|\\<SR\\>$\\<SRT\\>$|\\<STR\\>$|\\<SST\\>$|\\<SEET\\>$|\\<TREET\\>$|\\<SHEER\\>$|\\<SHEE\\>$|\\<STREE\\>$|\\<SREET\\>$|\\<REET\\>$|\\<STEE\\>$|\\<ST\\>$","STREET",x)
   x<-gsub("\\<N\\>","NORTH",x)
@@ -144,30 +144,39 @@ x<-gsub("(?<=\\d) (?=\\d)","",x,perl = T) #new close gaps between all numbers
 } 
 ```
 
+```{r}
+# change street names
+street_names <- function(x) {
+  x <- gsub("V", "Street", x)
+  x <- gsub(".x", "", x)
+}
+```
 
 ## MN
 ```{r}
 # clean strings separately
 morse_mn1910[ , -1] <- apply(morse_mn1910[ , -1], 2, str_clean_streets)
 mn_original[ , -1] <- apply(mn_original[ , -1], 2, str_clean_streets)
-#colnames(morse_mn1910) <- 
-#write_csv(morse_mn1910, "morse_mn1910.csv")
-#write_csv(mn_original, "geo_mn1910.csv")
+colnames(morse_mn1910) <- street_names(colnames(morse_mn1910))
+colnames(mn_original) <- street_names(colnames(mn_original))
+#write_csv(morse_mn1910, "Data/morse_mn1910.csv")
+#write_csv(mn_original, "Data/geo_mn1910.csv")
 ```
 
 
 ```{r}
 # join cleaned strings 
-combined_edict_mn<-left_join(morse_mn1910,mn_original,by="ED")
+combined_edict_mn <- left_join(morse_mn1910, mn_original,by = "ED")
+colnames(combined_edict_mn) <- street_names(colnames(combined_edict_mn))
 ```
 
 
 ```{r}
 # remove duplicates
 combined_edict_mn[ , -1] %>% rowwise() %>%
-  do(data.frame(., unique(.)))
+  unique() %>% ungroup()
 
-#write_csv(combined_edict_mn, "combined_edict_mn.csv")
+#write_csv(combined_edict_mn, "Data/combined_edict_mn.csv")
 ```
 
 
@@ -191,9 +200,8 @@ c <- left_join(a, b, by= "ED")
 c[c == "ABCDNN [M]"] <- NA
 c[c == "ABCDNN [G]"] <- NA
 combined_marker_mn <- c
-#write_csv(combined_marker_mn, "combined_marker_mn.csv")
+#write_csv(combined_marker_mn, "Data/combined_marker_mn.csv")
 ```
-
 
 
 ## BK
@@ -201,22 +209,24 @@ combined_marker_mn <- c
 # clean strings separately
 morse_bk1910[ , -1] <- apply(morse_bk1910[ , -1], 2, str_clean_streets)
 bk_original[ , -1] <- apply(bk_original[ , -1], 2, str_clean_streets)
-#write_csv(morse_bk1910, "morse_bk1910.csv")
-#write_csv(bk_original, "geo_bk1910.csv")
+colnames(morse_bk1910) <- street_names(colnames(morse_bk1910))
+colnames(bk_original) <- street_names(colnames(bk_original))
+#write_csv(morse_bk1910, "Data/morse_bk1910.csv")
+#write_csv(bk_original, "Data/geo_bk1910.csv")
 ```
 
 
 ```{r}
 # join cleaned strings 
 combined_edict_bk <- left_join(morse_bk1910,bk_original,by="ED")
-
+colnames(combined_edict_bk) <- street_names(colnames(combined_edict_bk))
 ```
 
 ```{r}
 # remove duplicates
 combined_edict_bk[ , -1] %>% rowwise() %>%
-  do(data.frame(., unique(.)))
-#write_csv(combined_edict_bk, "combined_edict_bk.csv")
+  unique() %>% ungroup()
+#write_csv(combined_edict_bk, "Data/combined_edict_bk.csv")
 ```
 
 ```{r}
@@ -240,13 +250,8 @@ cc <- left_join(aa, bb, by= "ED")
 cc[cc == "ABCDNN [M]"] <- NA
 cc[cc == "ABCDNN [G]"] <- NA
 combined_marker_bk <- cc
-#write_csv(combined_marker_bk, "combined_marker_bk.csv")
+#write_csv(combined_marker_bk, "Data/combined_marker_bk.csv")
 ```
-
-```{r}
-with(morse_mn1910, ED <- as.factor(ED))
-```
-
 
 
 
