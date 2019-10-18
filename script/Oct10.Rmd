@@ -200,7 +200,8 @@ c <- left_join(a, b, by= "ED")
 c[c == "ABCDNN [M]"] <- NA
 c[c == "ABCDNN [G]"] <- NA
 combined_marker_mn <- c
-#write_csv(combined_marker_mn, "Data/combined_marker_mn.csv")
+colnames(combined_marker_mn) <- street_names(colnames(combined_marker_mn))
+write_csv(combined_marker_mn, "Data/combined_marker_mn.csv")
 ```
 
 
@@ -218,7 +219,7 @@ colnames(bk_original) <- street_names(colnames(bk_original))
 
 ```{r}
 # join cleaned strings 
-combined_edict_bk <- left_join(morse_bk1910,bk_original,by="ED")
+combined_edict_bk <- left_join(morse_bk1910, bk_original,by="ED")
 colnames(combined_edict_bk) <- street_names(colnames(combined_edict_bk))
 ```
 
@@ -250,7 +251,8 @@ cc <- left_join(aa, bb, by= "ED")
 cc[cc == "ABCDNN [M]"] <- NA
 cc[cc == "ABCDNN [G]"] <- NA
 combined_marker_bk <- cc
-#write_csv(combined_marker_bk, "Data/combined_marker_bk.csv")
+colnames(combined_marker_bk) <- street_names(colnames(combined_marker_bk))
+write_csv(combined_marker_bk, "Data/combined_marker_bk.csv")
 ```
 
 
