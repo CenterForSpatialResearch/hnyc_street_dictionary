@@ -47,7 +47,7 @@ full_bk_dict <- full_join(morse_bk, bk_geo, by = "ED")
 ## MN
 ```{r}
 full_mn_dict <- gather(data = full_mn_dict, key = item, 
-                          value = value, M_St1:St27) %>% 
+                          value = value, Street1:St32) %>% 
   select(-item) %>% group_by(ED) %>% ungroup()
 full_mn_dict <- na.omit(full_mn_dict)
 colnames(full_mn_dict)[2] = "streets"
@@ -71,7 +71,7 @@ full_mn_dict <- full_mn_dict[mixedorder(colnames(full_mn_dict))]
 
 ```{r}
 full_bk_dict <- gather(data = full_bk_dict, key = item, 
-                          value = value, Street1:St58) %>% 
+                          value = value, Street1:St78) %>% 
   select(-item) %>% group_by(ED) %>% ungroup()
 full_bk_dict <- na.omit(full_bk_dict)
 colnames(full_bk_dict)[2] = "streets"
@@ -91,8 +91,8 @@ full_bk_dict <- full_bk_dict[mixedorder(colnames(full_bk_dict))]
 ```
 
 ```{r}
-## write_csv(full_mn_dict, "Data/full_mn_dict.csv")
-## write_csv(full_bk_dict, "Data/full_bk_dict.csv")
+write_csv(full_mn_dict, "Data/full_mn_dict.csv")
+write_csv(full_bk_dict, "Data/full_bk_dict.csv")
 ```
 
 

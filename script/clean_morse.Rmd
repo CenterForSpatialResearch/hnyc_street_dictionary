@@ -19,7 +19,7 @@ morse_bk1910$ED<-as.numeric(as.character(morse_bk1910$ED))
 
 ```{r}
 # load clean function
-load("lib/clean_function.R")
+source("lib/clean_function.R")
 ```
 
 ```{r}

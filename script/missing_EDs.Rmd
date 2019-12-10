@@ -77,7 +77,7 @@ morse_bk_list$street<-trimws(morse_bk_list$street,"both")
 ```
 
 
-## geo coder
+## geo dict
 ```{r}
 colnames(mn_geo) <- paste0("St", 0:(ncol(mn_geo)-1), sep = "")
 colnames(mn_geo)[1] <- "ED"
@@ -134,8 +134,8 @@ missing_geo_bk <- missing_BK %>%
 ```
 
 ```{r}
-## write_csv(missing_geo_mn, "Data/missing_EDs_mn.csv")
-## write_csv(missing_geo_bk, "Data/missing_EDs_bk.csv")
+write_csv(missing_geo_mn, "Data/missing_EDs_mn.csv")
+write_csv(missing_geo_bk, "Data/missing_EDs_bk.csv")
 ```
 
 
