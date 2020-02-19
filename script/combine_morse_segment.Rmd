@@ -111,6 +111,7 @@ bk_seg4$source <- "geo"
 combine_mn <- full_join(mn_ed, mn_seg4, by = c("ED", "Name"))
 combine_bk <- full_join(bk_ed, bk_seg4, by = c("ED", "Name"))
 ```
+
 ## tidy source column
 ```{r}
 combine_mn$source <- paste0(combine_mn$source.x, " ", combine_mn$source.y)
@@ -124,6 +125,34 @@ combine_mn <- combine_mn %>% select(-source.x, -source.y)
 combine_bk <- combine_bk %>% select(-source.x, -source.y)
 ```
 
+## add street type
+```{r}
+source("lib/st_type.R")
+```
+
+```{r}
+combine_mn <- combine_mn %>% rowwise() %>%
+  mutate(st_type = type(Name)) %>%
+  ungroup()
+```
+
+
+```{r}
+combine_bk <- combine_bk %>% rowwise() %>%
+  mutate(st_type = type(Name)) %>%
+  ungroup()
+```
+
+## change to factore
+```{r}
+combine_mn$st_type <- as.factor(combine_mn$st_type)
+combine_mn$source <- as.factor(combine_mn$source)
+combine_bk$st_type <- as.factor(combine_bk$st_type)
+combine_bk$source <- as.factor(combine_bk$source)
+```
+
+
+# write data
 ```{r}
 write_csv(combine_mn, "Data/combine_mn.csv")
 write_csv(combine_bk, "Data/combine_bk.csv")

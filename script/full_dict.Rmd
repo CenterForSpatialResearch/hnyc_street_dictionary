@@ -71,7 +71,7 @@ full_mn_dict <- full_mn_dict[mixedorder(colnames(full_mn_dict))]
 
 ```{r}
 full_bk_dict <- gather(data = full_bk_dict, key = item, 
-                          value = value, Street1:St78) %>% 
+                          value = value, Street1:St77) %>% 
   select(-item) %>% group_by(ED) %>% ungroup()
 full_bk_dict <- na.omit(full_bk_dict)
 colnames(full_bk_dict)[2] = "streets"
@@ -94,6 +94,4 @@ full_bk_dict <- full_bk_dict[mixedorder(colnames(full_bk_dict))]
 write_csv(full_mn_dict, "Data/full_mn_dict.csv")
 write_csv(full_bk_dict, "Data/full_bk_dict.csv")
 ```
-
-
 

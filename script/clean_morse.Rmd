@@ -4,6 +4,7 @@ author: "Chang Xu"
 output: html_notebook
 ---
 
+
 ```{r}
 # load data
 morse_mn1910<-read_csv("Data/MN_MORSE_EDstreet_dict_1910.csv") 
