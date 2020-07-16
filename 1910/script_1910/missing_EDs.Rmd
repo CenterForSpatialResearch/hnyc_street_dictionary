@@ -1,0 +1,147 @@
+---
+title: "Missing ED"
+author: "Chang Xu"
+output: html_notebook
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(error = TRUE)
+knitr::opts_chunk$set(cache = F)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+options(mc.cores = parallel::detectCores())
+library(zoo)
+library(magrittr)
+library(dplyr)
+library(tidyverse)
+library(openxlsx)
+library(readxl)
+library(stringr)
+library(fuzzyjoin)
+library(tm)
+library(english)
+library(reshape2)
+library(gtools)
+library(compare)
+library(purrr)
+```
+
+# load data
+```{r}
+morse_mn <- read_csv("Data/morse_mn1910.csv")
+morse_bk <- read_csv("Data/morse_bk1910.csv")
+```
+```{r}
+mn_geo <- read_csv("Data/geo_dict_mn.csv")
+bk_geo <- read_csv("Data/geo_dict_bk.csv")
+```
+
+
+## Morse
+
+```{r}
+colnames(morse_mn) <- paste0("St", 0:(ncol(morse_mn)-1), sep = "")
+colnames(morse_mn)[1] <- "ED"
+morse_mn_list<-gather(data = morse_mn, 
+             key = item, 
+             value = value, 
+             St1:St35)%>%
+   select(-item)
+```
+```{r}
+morse_mn_list<-na.omit(morse_mn_list)
+colnames(morse_mn_list)[2]<-"street"
+```
+```{r}
+morse_mn_list$source<-"morse"
+morse_mn_list$street<-trimws(morse_mn_list$street,"both")
+```
+
+
+```{r}
+colnames(morse_bk) <- paste0("St", 0:(ncol(morse_bk)-1), sep = "")
+colnames(morse_bk)[1] <- "ED"
+morse_bk_list<-gather(data = morse_bk, 
+             key = item, 
+             value = value, 
+             St1:St72)%>%
+   select(-item)
+```
+```{r}
+morse_bk_list<-na.omit(morse_bk_list)
+colnames(morse_bk_list)[2]<-"street"
+```
+```{r}
+morse_bk_list$source<-"morse"
+morse_bk_list$street<-trimws(morse_bk_list$street,"both")
+```
+
+
+## geo dict
+```{r}
+colnames(mn_geo) <- paste0("St", 0:(ncol(mn_geo)-1), sep = "")
+colnames(mn_geo)[1] <- "ED"
+mn_geo_list<-gather(data = mn_geo, 
+             key = item, 
+             value = value, 
+             St1:St27)%>%
+   select(-item)
+```
+```{r}
+mn_geo_list<-na.omit(mn_geo_list)
+colnames(mn_geo_list)[2]<-"street"
+```
+```{r}
+mn_geo_list$source<-"morse"
+mn_geo_list$street<-trimws(mn_geo_list$street,"both")
+```
+
+
+```{r}
+colnames(bk_geo) <- paste0("St", 0:(ncol(bk_geo)-1), sep = "")
+colnames(bk_geo)[1] <- "ED"
+bk_geo_list<-gather(data = bk_geo, 
+             key = item, 
+             value = value, 
+             St1:St58)%>%
+   select(-item)
+```
+```{r}
+bk_geo_list<-na.omit(bk_geo_list)
+colnames(bk_geo_list)[2]<-"street"
+```
+```{r}
+bk_geo_list$source<-"morse"
+bk_geo_list$street<-trimws(bk_geo_list$street,"both")
+```
+
+# check missing ED
+
+```{r}
+#left join 
+missing_MN <- left_join(morse_mn_list, mn_geo_list, by = c("ED","street"))
+missing_geo_mn <- missing_MN %>%
+  filter(is.na(source.y) == TRUE) %>%
+  select(-c(source.x, source.y))
+```
+
+```{r}
+#left join 
+missing_BK <- left_join(morse_bk_list, bk_geo_list, by = c("ED","street"))
+missing_geo_bk <- missing_BK %>%
+  filter(is.na(source.y) == TRUE) %>%
+  select(-c(source.x, source.y))
+```
+
+```{r}
+write_csv(missing_geo_mn, "Data/missing_EDs_mn.csv")
+write_csv(missing_geo_bk, "Data/missing_EDs_bk.csv")
+```
+
+
+
+
+
+
+
+

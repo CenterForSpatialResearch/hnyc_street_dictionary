@@ -96,7 +96,7 @@ clean<-function(x){
   x<-trimws(x, "both")
   
   ## overall spacing problem extra white space
-  x <- gsub("((\\w+|\\d+)\\s\\s(\\w+|\\d+))", "\\2 \\3", x)
+  x <- gsub("((\\w+|\\d+)\\s\\s(\\w+|\\d+))", "\\2 \\3", x)  #d+ can be multiple spaces.
   x <- gsub("((\\w+|\\d+)\\s\\s\\s(\\w+|\\d+))", "\\2 \\3", x)
   
   ## 4 W to W 4

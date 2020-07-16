@@ -1,0 +1,42 @@
+---
+title: "Clean Morse"
+author: "Chang Xu"
+output: html_notebook
+---
+
+
+```{r}
+# load data
+morse_mn1880<-read_csv("Data/MN_MORSE_EDstreet_dict_1880.csv") 
+morse_bk1880<-read_csv("Data/BK_MORSE_EDstreet_dict_1880.csv")
+```
+
+```{r}
+morse_mn1880<-as.data.frame(sapply(morse_mn1880, toupper)) 
+morse_bk1880<-as.data.frame(sapply(morse_bk1880, toupper))
+morse_mn1880$ED<-as.numeric(as.character(morse_mn1880$ED))
+morse_bk1880$ED<-as.numeric(as.character(morse_bk1880$ED))
+```
+
+```{r}
+# load clean function
+source("lib/clean_function.R")
+```
+
+```{r}
+# clean strings separately
+morse_mn1880[ , -1] <- apply(morse_mn1880[ , -1], 2, clean)
+colnames(morse_mn1880) <- gsub("V", "Street", colnames(morse_mn1880))
+```
+```{r}
+morse_bk1880[ , -1] <- apply(morse_bk1880[ , -1], 2, clean)
+colnames(morse_bk1880) <- gsub("V", "Street", colnames(morse_bk1880))
+```
+
+```{r}
+write_csv(morse_mn1880, "Data/morse_mn1880.csv")
+write_csv(morse_bk1880, "Data/morse_bk1880.csv")
+```
+
+
+
