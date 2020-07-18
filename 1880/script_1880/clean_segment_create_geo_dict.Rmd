@@ -29,8 +29,8 @@ library(purrr)
 # load data & clean data
 
 ```{r}
-mn_seg <- read_csv("Data/mn_segments_1910export.csv")
-bk_seg <- read_csv("Data/bk_segments_1910export.csv")
+mn_seg <- read_csv("Data/mn_segments_1880export.csv")
+bk_seg <- read_csv("Data/bk_segments_1880export.csv")
 ```
 
 ```{r}
@@ -38,19 +38,19 @@ source("lib/clean_function.R")
 ```
 
 ```{r}
-mn_seg$MN_STREET1910_FULL_STREE = clean(mn_seg$MN_STREET1910_FULL_STREE)
-mn_seg$MN_STREET1910_Y1910NAMEALT = clean(mn_seg$MN_STREET1910_Y1910NAMEALT)
-mn_seg$MN_STREET1910_Y1910NAMESTREET = clean(mn_seg$MN_STREET1910_Y1910NAMESTREET)
+mn_seg$MN_STREET1880_FULL_STREE = clean(mn_seg$MN_STREET1880_FULL_STREE)
+mn_seg$MN_STREET1880_Y1880NAMEALT = clean(mn_seg$MN_STREET1880_Y1880NAMEALT)
+mn_seg$MN_STREET1880_Y1880NAMESTREET = clean(mn_seg$MN_STREET1880_Y1880NAMESTREET)
 
-bk_seg$BK_STREET1910_FULL_STREE = clean(bk_seg$BK_STREET1910_FULL_STREE)
-bk_seg$BK_STREET1910_Y1910NAMEALT = clean(bk_seg$BK_STREET1910_Y1910NAMEALT)
-bk_seg$BK_STREET1910_Y1910NAMESTREET = clean(bk_seg$BK_STREET1910_Y1910NAMESTREET)
+bk_seg$BK_STREET1880_FULL_STREE = clean(bk_seg$BK_STREET1880_FULL_STREE)
+bk_seg$BK_STREET1880_Y1880NAMEALT = clean(bk_seg$BK_STREET1880_Y1880NAMEALT)
+bk_seg$BK_STREET1880_Y1880NAMESTREET = clean(bk_seg$BK_STREET1880_Y1880NAMESTREET)
 ```
 
 ## re-arrange dataset
 ```{r}
-mn_seg <- mn_seg %>% select(-XCoord, -YCoord)
-bk_seg <- bk_seg %>% select(-XCoord, -YCoord)
+#mn_seg <- mn_seg %>% select(-XCoord, -YCoord)
+#bk_seg <- bk_seg %>% select(-XCoord, -YCoord)
 ```
 
 ```{r}
@@ -59,7 +59,7 @@ bk_seg <- as_tibble(sapply(bk_seg, toupper))
 ```
 
 ```{r}
-colnames(mn_seg) <- c("ObjectID", "Full_Name", "Name1910", 
+colnames(mn_seg) <- c("ObjectID", "Full_Name", "Name1880", 
                       "Left_Low", "Left_High", "Right_Low", "Right_High",
                       "JoinId", "AltName", "ED_Minus", "ED_Plus")
 mn_seg <- mn_seg[c(2, 3, 9, 4, 5, 6, 7, 10, 11, 1, 8)]
@@ -73,7 +73,7 @@ mn_seg$ED_Plus <- as.numeric(mn_seg$ED_Plus)
 ```
 
 ```{r}
-colnames(bk_seg) <- c("ObjectID", "Full_Name", "Name1910", 
+colnames(bk_seg) <- c("ObjectID", "Full_Name", "Name1880", 
                       "Left_Low", "Left_High", "Right_Low", "Right_High",
                       "JoinId", "AltName", "ED_Minus", "ED_Plus")
 bk_seg <- bk_seg[c(2, 3, 9, 4, 5, 6, 7, 10, 11, 1, 8)]
@@ -89,14 +89,14 @@ bk_seg$ED_Plus <- as.numeric(bk_seg$ED_Plus)
 ## create Name column with priority
 ```{r}
 mn_seg <- mn_seg %>% rowwise() %>% 
-  mutate(Name = ifelse(Name1910 != "NULL", Name1910, 
+  mutate(Name = ifelse(Name1880 != "NULL", Name1880, 
                           ifelse(Full_Name != "NULL", Full_Name, AltName))) %>%
   ungroup()
 ```
 
 ```{r}
 bk_seg <- bk_seg %>% rowwise() %>% 
-  mutate(Name = ifelse(Name1910 != "NULL", Name1910, 
+  mutate(Name = ifelse(Name1880 != "NULL", Name1880, 
                           ifelse(Full_Name != "NULL", Full_Name, AltName))) %>%
   ungroup()
 ```
