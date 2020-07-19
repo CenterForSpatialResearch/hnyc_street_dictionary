@@ -29,8 +29,8 @@ library(purrr)
 ## load data
 
 ```{r}
-morse_mn <- read_csv("Data/morse_mn1910.csv")
-morse_bk <- read_csv("Data/morse_bk1910.csv")
+morse_mn <- read_csv("Data/morse_mn1880.csv")
+morse_bk <- read_csv("Data/morse_bk1880.csv")
 ```
 ```{r}
 mn_seg <- read_csv("Data/segment_mn.csv")
@@ -46,6 +46,7 @@ test1 = test %>%
   gather(colnames(test)[-1], key = "StreetNum", value = "StreetName") 
 mn_ed <- na.omit(test1) %>% select(ED, Name = StreetName)
 ```
+
 ```{r}
 ## BK
 colnames(morse_bk) <- gsub("Street", "St", colnames(morse_bk))
@@ -55,6 +56,12 @@ test1 = test %>%
 bk_ed <- na.omit(test1) %>% select(ED, Name = StreetName)
 ```
 
+```{r}
+head(morse_bk)
+```
+```{r}
+head(mn_seg)
+```
 ## add source
 ```{r}
 mn_ed$source <- "Morse"
@@ -79,6 +86,11 @@ mn_seg3 <- mn_seg %>% filter(ED_Minus != ED_Plus) %>%
 ```{r}
 mn_seg4 <- rbind(mn_seg1, mn_seg2, mn_seg3)
 mn_seg4 <- mn_seg4[c(11, 10, 1:9)]
+```
+
+
+```{r}
+head(mn_seg4)
 ```
 
 
@@ -125,6 +137,14 @@ combine_mn <- combine_mn %>% select(-source.x, -source.y)
 combine_bk <- combine_bk %>% select(-source.x, -source.y)
 ```
 
+```{r}
+head(combine_mn)
+```
+```{r}
+combine_bk
+```
+
+
 ## add street type
 ```{r}
 source("lib/st_type.R")
@@ -147,6 +167,8 @@ combine_bk <- combine_bk %>% rowwise() %>%
 ```{r}
 combine_mn$st_type <- as.factor(combine_mn$st_type)
 combine_mn$source <- as.factor(combine_mn$source)
+```
+```{r}
 combine_bk$st_type <- as.factor(combine_bk$st_type)
 combine_bk$source <- as.factor(combine_bk$source)
 ```

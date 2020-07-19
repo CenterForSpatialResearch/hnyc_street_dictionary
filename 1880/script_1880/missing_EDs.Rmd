@@ -36,6 +36,10 @@ mn_geo <- read_csv("Data/geo_dict_mn.csv")
 bk_geo <- read_csv("Data/geo_dict_bk.csv")
 ```
 
+```{r}
+#head(morse_mn)
+```
+
 
 ## Morse
 
@@ -76,6 +80,10 @@ morse_bk_list$source<-"morse"
 morse_bk_list$street<-trimws(morse_bk_list$street,"both")
 ```
 
+```{r}
+#head(mn_geo)
+```
+
 
 ## geo dict
 ```{r}
@@ -84,7 +92,7 @@ colnames(mn_geo)[1] <- "ED"
 mn_geo_list<-gather(data = mn_geo, 
              key = item, 
              value = value, 
-             St1:St27)%>%
+             St1:St32)%>%
    select(-item)
 ```
 ```{r}
@@ -96,6 +104,10 @@ mn_geo_list$source<-"morse"
 mn_geo_list$street<-trimws(mn_geo_list$street,"both")
 ```
 
+```{r}
+#head(bk_geo)
+```
+
 
 ```{r}
 colnames(bk_geo) <- paste0("St", 0:(ncol(bk_geo)-1), sep = "")
@@ -103,7 +115,7 @@ colnames(bk_geo)[1] <- "ED"
 bk_geo_list<-gather(data = bk_geo, 
              key = item, 
              value = value, 
-             St1:St58)%>%
+             St1:St48)%>%
    select(-item)
 ```
 ```{r}
