@@ -53,7 +53,7 @@ head(full_mn_dict)
 ## MN
 ```{r}
 full_mn_dict <- gather(data = full_mn_dict, key = item, 
-                          value = value, Street1:St30) %>% 
+                          value = value, Street1:St32) %>% 
   select(-item) %>% group_by(ED) %>% ungroup()
 full_mn_dict <- na.omit(full_mn_dict)
 colnames(full_mn_dict)[2] = "streets"
@@ -80,7 +80,7 @@ head(full_bk_dict)
 
 ```{r}
 full_bk_dict <- gather(data = full_bk_dict, key = item, 
-                          value = value, Street1:St76) %>% 
+                          value = value, Street1:St48) %>% 
   select(-item) %>% group_by(ED) %>% ungroup()
 full_bk_dict <- na.omit(full_bk_dict)
 colnames(full_bk_dict)[2] = "streets"
