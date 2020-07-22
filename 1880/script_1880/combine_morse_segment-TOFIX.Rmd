@@ -85,6 +85,11 @@ mn_seg3 <- mn_seg %>% filter(ED_Minus != ED_Plus) %>%
 
 ```{r}
 mn_seg4 <- rbind(mn_seg1, mn_seg2, mn_seg3)
+```
+```{r}
+head(mn_seg4)
+```
+```{r}
 mn_seg4 <- mn_seg4[c(11, 10, 1:9)]
 ```
 
@@ -147,12 +152,47 @@ combine_bk
 
 ## add street type
 ```{r}
-source("lib/st_type.R")
+source("lib/st_type2.R")
 ```
 
+# FIX HERE!
 ```{r}
 combine_mn <- combine_mn %>% rowwise() %>%
   mutate(st_type = type(Name)) %>%
+  ungroup()
+#Use next block
+```
+```{r}
+combine_mn <- 
+  combine_mn %>% rowwise() %>%
+  mutate(st_type = case_when(
+      str_detect(type(Name), " PL") ~ "PL",
+      str_detect(type(Name), " CT") ~ "CT", 
+      str_detect(type(Name), " PARK") ~ "PARK", 
+      str_detect(type(Name), " DR") ~ "DR", 
+      str_detect(type(Name), " SQ") ~ "SQ", 
+      str_detect(type(Name), " PLZ") ~ "PLZ", 
+      str_detect(type(Name), " PKWY") ~ "PKWY", 
+      str_detect(type(Name), " CIR") ~ "CIR", 
+      str_detect(type(Name), " WAY") ~ "WAY", # ~ "PL",
+      str_detect(type(Name), " ALY") ~ "ALY", 
+      str_detect(type(Name), "PIER ") ~ "PIER", 
+      str_detect(type(Name), " PIER") ~ "PIER", 
+      str_detect(Name, " SLIP") ~ "SLIP", 
+      str_detect(Name, " ROW") ~ "ROW", 
+      str_detect(Name, "APPROACH") ~ "APPROACH", 
+      str_detect(Name, " LN") ~ "LN", 
+      str_detect(Name, " TER") ~ "TER", 
+      str_detect(Name, " HTS") ~ "HTS", 
+      str_detect(Name, " BLVD") ~ "BLVD", 
+      str_detect(Name, " BRG") ~ "BRG", 
+      str_detect(Name, " HL") ~ "HL", 
+      str_detect(Name, " AVE") ~ "AVE", 
+      str_detect(Name, "AVE ") ~ "AVE", 
+      str_detect(Name, " BROADWAY") ~ "BROADWAY", 
+      #TRUE ~ type(Name)
+    )
+  ) %>%
   ungroup()
 ```
 
