@@ -33,11 +33,18 @@ bk <- read_csv("Data/combine_bk.csv")
 ```
 
 # MN
+```{r}
+head(mn)
+```
+
 
 ```{r}
 mn$flag <- rep(NA, nrow(mn))
 ```
 
+```{r}
+head(mn)
+```
 ## Missing house Number (incomplete)
 
 ```{r}
@@ -78,6 +85,10 @@ write_csv(mnr, "Data/mn_seg_add_range.csv")
 
 ```{r}
 bk$flag <- rep(NA, nrow(bk))
+```
+
+```{r}
+head(bk)
 ```
 
 ## Missing house Number (incomplete)

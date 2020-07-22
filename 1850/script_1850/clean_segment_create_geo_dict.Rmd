@@ -59,7 +59,8 @@ bk_seg <- as_tibble(sapply(bk_seg, toupper))
 ```
 
 ```{r}
-#head(mn_seg)
+head(mn_seg)
+head(bk_seg)
 ```
 
 
@@ -71,8 +72,9 @@ colnames(mn_seg) <- c("ObjectID", "Full_Name", "Name1850",
 ```
 
 ```{r}
-#head(mn_seg)
+head(mn_seg)
 ```
+
 
 ```{r}
 mn_seg <- mn_seg[c(2, 3, 9, 4, 5, 6, 7, 10, 11, 1, 8)]
@@ -93,6 +95,13 @@ head(mn_seg)
 colnames(bk_seg) <- c("ObjectID", "Full_Name", "Name1850", 
                       "Left_Low", "Left_High", "Right_Low", "Right_High",
                       "JoinId", "AltName", "Ward_Right", "Ward_Left")
+```
+
+```{r}
+head(bk_seg)
+```
+
+```{r}
 bk_seg <- bk_seg[c(2, 3, 9, 4, 5, 6, 7, 10, 11, 1, 8)]
 
 bk_seg$Left_Low <- as.numeric(bk_seg$Left_Low)
@@ -102,7 +111,9 @@ bk_seg$Right_High <- as.numeric(bk_seg$Right_High)
 bk_seg$Ward_Right <- as.numeric(bk_seg$Ward_Right)
 bk_seg$Ward_Left <- as.numeric(bk_seg$Ward_Left)
 ```
-
+```{r}
+head(bk_seg)
+```
 ## create Name column with priority
 ```{r}
 mn_seg <- mn_seg %>% rowwise() %>% 
