@@ -30,18 +30,23 @@ library(purrr)
 
 # load data
 ```{r}
-morse_mn <- read_csv("Data/morse_mn1880.csv")
-morse_bk <- read_csv("Data/morse_bk1880.csv")
+#morse_mn <- read_csv("Data/morse_mn1880.csv")
+#morse_bk <- read_csv("Data/morse_bk1880.csv")
 ```
 ```{r}
 mn_geo <- read_csv("Data/geo_dict_mn.csv")
 bk_geo <- read_csv("Data/geo_dict_bk.csv")
 ```
+```{r}
+head(mn_geo)
+```
 
 # combined dictionary
 ```{r}
-full_mn_dict <- full_join(morse_mn, mn_geo, by = "ED")
-full_bk_dict <- full_join(morse_bk, bk_geo, by = "ED")
+#full_mn_dict <- full_join(morse_mn, mn_geo, by = "ED")
+#full_bk_dict <- full_join(morse_bk, bk_geo, by = "ED")
+full_mn_dict <- mn_geo
+full_bk_dict <- bk_geo
 ```
 
 
@@ -53,7 +58,7 @@ head(full_mn_dict)
 ## MN
 ```{r}
 full_mn_dict <- gather(data = full_mn_dict, key = item, 
-                          value = value, Street1:St30) %>% 
+                          value = value, St1:St164) %>% 
   select(-item) %>% group_by(ED) %>% ungroup()
 full_mn_dict <- na.omit(full_mn_dict)
 colnames(full_mn_dict)[2] = "streets"
@@ -80,7 +85,7 @@ head(full_bk_dict)
 
 ```{r}
 full_bk_dict <- gather(data = full_bk_dict, key = item, 
-                          value = value, Street1:St76) %>% 
+                          value = value, St1:St86) %>% 
   select(-item) %>% group_by(ED) %>% ungroup()
 full_bk_dict <- na.omit(full_bk_dict)
 colnames(full_bk_dict)[2] = "streets"
