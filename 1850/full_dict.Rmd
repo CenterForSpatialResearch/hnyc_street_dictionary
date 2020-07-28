@@ -59,21 +59,21 @@ head(full_mn_dict)
 ```{r}
 full_mn_dict <- gather(data = full_mn_dict, key = item, 
                           value = value, St1:St164) %>% 
-  select(-item) %>% group_by(ED) %>% ungroup()
+  select(-item) %>% group_by(Ward) %>% ungroup()
 full_mn_dict <- na.omit(full_mn_dict)
 colnames(full_mn_dict)[2] = "streets"
 ```
 ```{r}
 full_mn_dict <- full_mn_dict %>%
   dplyr::arrange(streets) %>%
-  melt(., id.vars = c("streets"), variable.name = "ED") %>%
-  select(-c(ED)) %>%
+  melt(., id.vars = c("streets"), variable.name = "Ward") %>%
+  select(-c(Ward)) %>%
   distinct(streets, value) %>%
   dplyr::group_by(value) %>%
   dplyr::mutate(rn = paste0("Street", 1:n())) %>%
   tidyr::spread(rn, streets)
 
-colnames(full_mn_dict)[1]="ED"
+colnames(full_mn_dict)[1]="Ward"
 full_mn_dict <- full_mn_dict[mixedorder(colnames(full_mn_dict))]
 ```
 
@@ -86,21 +86,21 @@ head(full_bk_dict)
 ```{r}
 full_bk_dict <- gather(data = full_bk_dict, key = item, 
                           value = value, St1:St86) %>% 
-  select(-item) %>% group_by(ED) %>% ungroup()
+  select(-item) %>% group_by(Ward) %>% ungroup()
 full_bk_dict <- na.omit(full_bk_dict)
 colnames(full_bk_dict)[2] = "streets"
 ```
 ```{r}
 full_bk_dict <- full_bk_dict %>%
   dplyr::arrange(streets) %>%
-  melt(., id.vars = c("streets"), variable.name = "ED") %>%
-  select(-c(ED)) %>%
+  melt(., id.vars = c("streets"), variable.name = "Ward") %>%
+  select(-c(Ward)) %>%
   distinct(streets, value) %>%
   dplyr::group_by(value) %>%
   dplyr::mutate(rn = paste0("Street", 1:n())) %>%
   tidyr::spread(rn, streets)
 
-colnames(full_bk_dict)[1]="ED"
+colnames(full_bk_dict)[1]="Ward"
 full_bk_dict <- full_bk_dict[mixedorder(colnames(full_bk_dict))]
 ```
 

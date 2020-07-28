@@ -41,7 +41,7 @@ bk_geo <- read_csv("Data/geo_dict_bk.csv")
 
 ```{r}
 colnames(morse_mn) <- paste0("St", 0:(ncol(morse_mn)-1), sep = "")
-colnames(morse_mn)[1] <- "ED"
+colnames(morse_mn)[1] <- "Ward"
 morse_mn_list<-gather(data = morse_mn, 
              key = item, 
              value = value, 
@@ -60,7 +60,7 @@ morse_mn_list$street<-trimws(morse_mn_list$street,"both")
 
 ```{r}
 colnames(morse_bk) <- paste0("St", 0:(ncol(morse_bk)-1), sep = "")
-colnames(morse_bk)[1] <- "ED"
+colnames(morse_bk)[1] <- "Ward"
 morse_bk_list<-gather(data = morse_bk, 
              key = item, 
              value = value, 
@@ -80,7 +80,7 @@ morse_bk_list$street<-trimws(morse_bk_list$street,"both")
 ## geo dict
 ```{r}
 colnames(mn_geo) <- paste0("St", 0:(ncol(mn_geo)-1), sep = "")
-colnames(mn_geo)[1] <- "ED"
+colnames(mn_geo)[1] <- "Ward"
 mn_geo_list<-gather(data = mn_geo, 
              key = item, 
              value = value, 
@@ -99,7 +99,7 @@ mn_geo_list$street<-trimws(mn_geo_list$street,"both")
 
 ```{r}
 colnames(bk_geo) <- paste0("St", 0:(ncol(bk_geo)-1), sep = "")
-colnames(bk_geo)[1] <- "ED"
+colnames(bk_geo)[1] <- "Ward"
 bk_geo_list<-gather(data = bk_geo, 
              key = item, 
              value = value, 
@@ -119,7 +119,7 @@ bk_geo_list$street<-trimws(bk_geo_list$street,"both")
 
 ```{r}
 #left join 
-missing_MN <- left_join(morse_mn_list, mn_geo_list, by = c("ED","street"))
+missing_MN <- left_join(morse_mn_list, mn_geo_list, by = c("Ward","street"))
 missing_geo_mn <- missing_MN %>%
   filter(is.na(source.y) == TRUE) %>%
   select(-c(source.x, source.y))
@@ -127,7 +127,7 @@ missing_geo_mn <- missing_MN %>%
 
 ```{r}
 #left join 
-missing_BK <- left_join(morse_bk_list, bk_geo_list, by = c("ED","street"))
+missing_BK <- left_join(morse_bk_list, bk_geo_list, by = c("Ward","street"))
 missing_geo_bk <- missing_BK %>%
   filter(is.na(source.y) == TRUE) %>%
   select(-c(source.x, source.y))

@@ -1,32 +1,29 @@
-type <- function(x) {
-  type <- "ST"
-  case_when(
-   str_detect(x, " PL") == T  ~ "PL",
-   str_detect(x, " CT") == T  ~ "CT",
-   str_detect(x, " PARK") == T  ~ "PARK",
-   str_detect(x, " DR") == T  ~ "DR",
-   str_detect(x, " SQ") == T  ~ "SQ",
-   str_detect(x, " PLZ") == T  ~ "PLZ",
-   str_detect(x, " PL") == T  ~ "PL",
-   str_detect(x, " CIR") == T  ~ "CIR",
-   str_detect(x, " PKWY") == T  ~ "PKWY",
-   str_detect(x, " WAY") == T  ~ "WAY",
-   str_detect(x, " ALY") == T  ~ "ALY",
-   str_detect(x, " PIER") == T  ~ "PIER",
-   str_detect(x, "PIER ") == T  ~ "PIER",
-   str_detect(x, " SLIP") == T  ~ "SLIP",
-   str_detect(x, " ROW") == T  ~ "ROW",
-   str_detect(x, " APPROACH") == T  ~ "APPROACH",
-   str_detect(x, " LN") == T  ~ "LN",
-   str_detect(x, " TER") == T  ~ "TER",
-   str_detect(x, " HTS") == T  ~ "HTS",
-   str_detect(x, " BLVD") == T  ~ "BLVD",
-   str_detect(x, " BRG") == T  ~ "BRG",
-   str_detect(x, " HL") == T  ~ "HL",
-   str_detect(x, " AVE") == T  ~ "AVE",
-   str_detect(x, "AVE ") == T  ~ "AVE",
-   str_detect(x, "BROADWAY") == T  ~ "BROADWAY",
-   TRUE ~ as.character(x)
-  )
-  return(type)
+street_type_builder = function(df1) {
+  df1$street_type = case_when(
+    str_detect(df1$best_match, pattern = " ST") ~ "ST",
+    str_detect(df1$best_match, pattern = " DR") ~ "DR",
+    str_detect(df1$best_match, pattern = " CIR") ~ "CIR",
+    str_detect(df1$best_match, pattern = " AVE") ~ "AVE",
+    str_detect(df1$best_match, pattern = " PL") ~ "PL",
+    str_detect(df1$best_match, pattern = " CT") ~ "CT",
+    str_detect(df1$best_match, pattern = " PARK") ~ "PARK",
+    str_detect(df1$best_match, pattern = " PLZ") ~ "PLZ",
+    str_detect(df1$best_match, pattern = " PKWY") ~ "PKWY",
+    str_detect(df1$best_match, pattern = " WAY") ~ "WAY",
+    str_detect(df1$best_match, pattern = " ALY") ~ "ALY",
+    str_detect(df1$best_match, pattern = " PIER") ~ "PIER",
+    str_detect(df1$best_match, pattern = "PIER") ~ "PIER",
+    str_detect(df1$best_match, pattern = " SLIP") ~ "SLIP",
+    str_detect(df1$best_match, pattern = " ROW") ~ "ROW",
+    str_detect(df1$best_match, pattern = " APPROACH") ~ "APPROACH",
+    str_detect(df1$best_match, pattern = " LN") ~ "LN",
+    str_detect(df1$best_match, pattern = " TER") ~ "TER",
+    str_detect(df1$best_match, pattern = " HTS") ~ "HTS",
+    str_detect(df1$best_match, pattern = " BLVD") ~ "BLVD",
+    str_detect(df1$best_match, pattern = " BRG") ~ "BRG",
+    str_detect(df1$best_match, pattern = " HL") ~ "HL",
+    str_detect(df1$best_match, pattern = "AVE") ~ "AVE",
+    str_detect(df1$best_match, pattern = "BROADWAY") ~ "AVE",
+    TRUE ~ "ST")
+  return(df)
 }
