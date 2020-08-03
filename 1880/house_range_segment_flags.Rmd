@@ -28,8 +28,8 @@ library(purrr)
 
 # load data
 ```{r}
-mn <- read_csv("Data/combine_mn.csv")
-bk <- read_csv("Data/combine_bk.csv")
+mn <- read_csv("Data/combine_mn1880.csv")
+bk <- read_csv("Data/combine_bk1880.csv")
 ```
 
 # MN
@@ -59,7 +59,7 @@ mn$flag[(abs(mn$Left_Low - mn$Right_Low) > 10) == TRUE] <- "WN"
 ```
 
 ```{r}
-write_csv(mn, "Data/mn_seg_flag.csv")
+write_csv(mn, "Data/mn_seg_flag1880.csv")
 ```
 
 ## House number range
@@ -69,7 +69,7 @@ mnr <- mn %>% group_by(ED, Name) %>%
   summarise(Min = min(Left_Low, Right_Low), Max = max(Left_High, Right_High))
 ```
 ```{r}
-write_csv(mnr, "Data/mn_seg_add_range.csv")
+write_csv(mnr, "Data/mn_seg_add_range1880.csv")
 ```
 
 
@@ -101,7 +101,7 @@ bk$flag[(abs(bk$Left_Low - bk$Right_Low) > 10) == TRUE] <- "WN"
 ```
 
 ```{r}
-write_csv(bk, "Data/bk_seg_flag.csv")
+write_csv(bk, "Data/bk_seg_flag1880.csv")
 ```
 
 ## House number range
@@ -111,7 +111,7 @@ bkr <- bk %>% group_by(ED, Name) %>%
   summarise(Min = min(Left_Low, Right_Low), Max = max(Left_High, Right_High))
 ```
 ```{r}
-write_csv(bkr, "Data/bk_seg_add_range.csv")
+write_csv(bkr, "Data/bk_seg_add_range1880.csv")
 ```
 
 

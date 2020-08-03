@@ -127,10 +127,6 @@ mn_seg <- mn_seg %>% rowwise() %>%
 #  ungroup()
 ```
 
-```{r}
-bk_seg
-```
-
 
 ```{r}
 bk_seg <- bk_seg %>% rowwise() %>% 
@@ -153,8 +149,8 @@ bk_seg <- bk_seg[c(12, 1:11)]
 ```
 
 ```{r}
-write_csv(mn_seg, "Data/segment_mn.csv")
-write_csv(bk_seg, "Data/segment_bk.csv")
+write_csv(mn_seg, "Data/segment_mn1850.csv")
+write_csv(bk_seg, "Data/segment_bk1850.csv")
 ```
 
 ## create geo_dict
@@ -179,7 +175,7 @@ mn_seg_list4 <- rbind(mn_seg_list1, mn_seg_list2, mn_seg_list3)
 
 ```{r}
 #dim(mn_seg_list4)
-#mn_seg_list4
+mn_seg_list4
 ```
 
 
@@ -222,11 +218,11 @@ geo_dict_mn$Ward <- as.numeric(geo_dict_mn$Ward)
 ```
 
 ```{r}
-#head(geo_dict_mn)
+head(geo_dict_mn)
 ```
 
 ```{r}
-write_csv(geo_dict_mn, "Data/geo_dict_mn.csv")
+write_csv(geo_dict_mn, "Data/geo_dict_mn1850.csv")
 ```
 
 # BK
@@ -302,7 +298,7 @@ geo_dict_bk$Ward <- as.numeric(geo_dict_bk$Ward)
 ```
 
 ```{r}
-write_csv(geo_dict_bk, "Data/geo_dict_bk.csv")
+write_csv(geo_dict_bk, "Data/geo_dict_bk1850.csv")
 ```
 
 

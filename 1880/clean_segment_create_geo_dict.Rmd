@@ -110,8 +110,8 @@ bk_seg <- bk_seg[c(12, 1:11)]
 ```
 
 ```{r}
-write_csv(mn_seg, "Data/segment_mn.csv")
-write_csv(bk_seg, "Data/segment_bk.csv")
+write_csv(mn_seg, "Data/segment_mn1880.csv")
+write_csv(bk_seg, "Data/segment_bk1880.csv")
 ```
 
 ## create geo_dict
@@ -172,7 +172,7 @@ geo_dict_mn$ED <- as.numeric(geo_dict_mn$ED)
 
 
 ```{r}
-write_csv(geo_dict_mn, "Data/geo_dict_mn.csv")
+write_csv(geo_dict_mn, "Data/geo_dict_mn1880.csv")
 ```
 
 ```{r}
@@ -231,7 +231,7 @@ geo_dict_bk$ED <- as.numeric(geo_dict_bk$ED)
 ```
 
 ```{r}
-write_csv(geo_dict_bk, "Data/geo_dict_bk.csv")
+write_csv(geo_dict_bk, "Data/geo_dict_bk1880.csv")
 ```
 
 

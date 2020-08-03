@@ -34,8 +34,8 @@ library(purrr)
 #morse_bk <- read_csv("Data/morse_bk1880.csv")
 ```
 ```{r}
-mn_geo <- read_csv("Data/geo_dict_mn.csv")
-bk_geo <- read_csv("Data/geo_dict_bk.csv")
+mn_geo <- read_csv("Data/geo_dict_mn1850.csv")
+bk_geo <- read_csv("Data/geo_dict_bk1850.csv")
 ```
 ```{r}
 head(mn_geo)
@@ -105,7 +105,7 @@ full_bk_dict <- full_bk_dict[mixedorder(colnames(full_bk_dict))]
 ```
 
 ```{r}
-write_csv(full_mn_dict, "Data/full_mn_dict.csv")
-write_csv(full_bk_dict, "Data/full_bk_dict.csv")
+write_csv(full_mn_dict, "Data/full_mn_dict1850.csv")
+write_csv(full_bk_dict, "Data/full_bk_dict1850.csv")
 ```
 

@@ -1,4 +1,4 @@
-ED,JoinId,Name,Full_Name,Name1850,AltName,Left_Low,Left_High,Right_Low,Right_High,ObjectID,source,flag
+Ward,JoinId,Name,Full_Name,Name1850,AltName,Left_Low,Left_High,Right_Low,Right_High,ObjectID,source,flag
 18,G00010003,NA,E 28,NA,NA,201,231,200,230,3,geo,IN
 10,G00010005,NA,BAYARD,NA,NA,70,72,NA,NA,5,geo,IN
 10,G00010006,NA,BAYARD,NA,NA,1,17,2,18,6,geo,IN

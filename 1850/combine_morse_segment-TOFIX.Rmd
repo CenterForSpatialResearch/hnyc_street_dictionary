@@ -29,51 +29,59 @@ library(purrr)
 ## load data
 
 ```{r}
-morse_mn <- read_csv("Data/morse_mn1910.csv")
-morse_bk <- read_csv("Data/morse_bk1910.csv")
+#morse_mn <- read_csv("Data/morse_mn1880.csv")
+#morse_bk <- read_csv("Data/morse_bk1880.csv")
 ```
 ```{r}
-mn_seg <- read_csv("Data/segment_mn.csv")
-bk_seg <- read_csv("Data/segment_bk.csv")
+mn_seg <- read_csv("Data/segment_mn1850.csv")
+bk_seg <- read_csv("Data/segment_bk1850.csv")
 ```
 
 ## rearrange Morse data
 ```{r}
-## MN
-colnames(morse_mn) <- gsub("Street", "St", colnames(morse_mn))
-test <- morse_mn
-test1 = test %>%
-  gather(colnames(test)[-1], key = "StreetNum", value = "StreetName") 
-mn_ed <- na.omit(test1) %>% select(ED, Name = StreetName)
-```
-```{r}
-## BK
-colnames(morse_bk) <- gsub("Street", "St", colnames(morse_bk))
-test <- morse_bk
-test1 = test %>%
-  gather(colnames(test)[-1], key = "StreetNum", value = "StreetName") 
-bk_ed <- na.omit(test1) %>% select(ED, Name = StreetName)
+# ## MN
+# colnames(morse_mn) <- gsub("Street", "St", colnames(morse_mn))
+# test <- morse_mn
+# test1 = test %>%
+#   gather(colnames(test)[-1], key = "StreetNum", value = "StreetName") 
+# mn_ed <- na.omit(test1) %>% select(ED, Name = StreetName)
+# ```
+# ```{r}
+# ## BK
+# colnames(morse_bk) <- gsub("Street", "St", colnames(morse_bk))
+# test <- morse_bk
+# test1 = test %>%
+#   gather(colnames(test)[-1], key = "StreetNum", value = "StreetName") 
+# bk_ed <- na.omit(test1) %>% select(ED, Name = StreetName)
 ```
 
 ## add source
 ```{r}
-mn_ed$source <- "Morse"
-bk_ed$source <- "Morse"
+# mn_ed$source <- "Morse"
+# bk_ed$source <- "Morse"
 ```
 
 ## spread geo dict
+```{r}
+head(mn_seg)
+head(bk_seg)
+```
 
 ```{r}
-mn_seg1 <- mn_seg %>% filter(ED_Minus == ED_Plus) %>% 
-  mutate(ED = ED_Minus) %>% select(-ED_Minus, -ED_Plus)
+mn_seg1 <- mn_seg %>% filter(Ward_Left == Ward_Right) %>% 
+  mutate(Ward = Ward_Left) %>% select(-Ward_Left, -Ward_Right)
 ```
 ```{r}
-mn_seg2 <- mn_seg %>% filter(ED_Minus != ED_Plus) %>% 
-  rename(ED = ED_Minus) %>% select(-ED_Plus)
+mn_seg2 <- mn_seg %>% filter(Ward_Left != Ward_Right) %>% 
+  rename(Ward = Ward_Left) %>% select(-Ward_Right)
 ```
 ```{r}
-mn_seg3 <- mn_seg %>% filter(ED_Minus != ED_Plus) %>% 
-  rename(ED = ED_Plus) %>% select(-ED_Minus)
+mn_seg3 <- mn_seg %>% filter(Ward_Left != Ward_Right) %>% 
+  rename(Ward = Ward_Right) %>% select(-Ward_Left)
+```
+
+```{r}
+mn_seg3
 ```
 
 ```{r}
@@ -81,23 +89,32 @@ mn_seg4 <- rbind(mn_seg1, mn_seg2, mn_seg3)
 mn_seg4 <- mn_seg4[c(11, 10, 1:9)]
 ```
 
+```{r}
+mn_seg4
+```
+
 
 ```{r}
-bk_seg1 <- bk_seg %>% filter(ED_Minus == ED_Plus) %>% 
-  mutate(ED = ED_Minus) %>% select(-ED_Minus, -ED_Plus)
+bk_seg1 <- bk_seg %>% filter(Ward_Left == Ward_Right) %>% 
+  mutate(Ward = Ward_Left) %>% select(-Ward_Left, -Ward_Right)
 ```
 ```{r}
-bk_seg2 <- bk_seg %>% filter(ED_Minus != ED_Plus) %>% 
-  rename(ED = ED_Minus) %>% select(-ED_Plus)
+bk_seg2 <- bk_seg %>% filter(Ward_Left != Ward_Right) %>% 
+  rename(Ward = Ward_Left) %>% select(-Ward_Right)
 ```
 ```{r}
-bk_seg3 <- bk_seg %>% filter(ED_Minus != ED_Plus) %>% 
-  rename(ED = ED_Plus) %>% select(-ED_Minus)
+bk_seg3 <- bk_seg %>% filter(Ward_Left != Ward_Right) %>% 
+  rename(Ward = Ward_Right) %>% select(-Ward_Left)
+
 ```
 
 ```{r}
 bk_seg4 <- rbind(bk_seg1, bk_seg2, bk_seg3)
 bk_seg4 <- bk_seg4[c(11, 10, 1:9)]
+```
+
+```{r}
+bk_seg4
 ```
 
 ## add source
@@ -106,10 +123,17 @@ mn_seg4$source <- "geo"
 bk_seg4$source <- "geo"
 ```
 
+
 ## combine with Morse
 ```{r}
-combine_mn <- full_join(mn_ed, mn_seg4, by = c("ED", "Name"))
-combine_bk <- full_join(bk_ed, bk_seg4, by = c("ED", "Name"))
+#combine_mn <- full_join(mn_ed, mn_seg4, by = c("Ward", "Name"))
+#combine_bk <- full_join(bk_ed, bk_seg4, by = c("Ward", "Name"))
+combine_mn <- mn_seg4
+combine_bk <- bk_seg4
+```
+```{r}
+#head(combine_bk)
+#head(combine_mn)
 ```
 
 ## tidy source column
@@ -118,11 +142,13 @@ combine_mn$source <- paste0(combine_mn$source.x, " ", combine_mn$source.y)
 combine_mn$source <- gsub("NA | NA", "", combine_mn$source)
 combine_bk$source <- paste0(combine_bk$source.x, " ", combine_bk$source.y)
 combine_bk$source <- gsub("NA | NA", "", combine_bk$source)
+combine_mn$source <- "geo"
+combine_bk$source <- "geo"
 ```
 
 ```{r}
-combine_mn <- combine_mn %>% select(-source.x, -source.y)
-combine_bk <- combine_bk %>% select(-source.x, -source.y)
+#combine_mn <- combine_mn %>% select(-source.x, -source.y)
+#combine_bk <- combine_bk %>% select(-source.x, -source.y)
 ```
 
 ## add street type
@@ -154,8 +180,8 @@ combine_bk$source <- as.factor(combine_bk$source)
 
 # write data
 ```{r}
-write_csv(combine_mn, "Data/combine_mn.csv")
-write_csv(combine_bk, "Data/combine_bk.csv")
+write_csv(combine_mn, "Data/combine_mn1850.csv")
+write_csv(combine_bk, "Data/combine_bk1850.csv")
 ```
 
 

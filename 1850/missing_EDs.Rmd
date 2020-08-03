@@ -28,54 +28,57 @@ library(purrr)
 
 # load data
 ```{r}
-morse_mn <- read_csv("Data/morse_mn1880.csv")
-morse_bk <- read_csv("Data/morse_bk1880.csv")
+#morse_mn <- read_csv("Data/morse_mn1880.csv")
+#morse_bk <- read_csv("Data/morse_bk1880.csv")
 ```
 ```{r}
-mn_geo <- read_csv("Data/geo_dict_mn.csv")
-bk_geo <- read_csv("Data/geo_dict_bk.csv")
+mn_geo <- read_csv("Data/geo_dict_mn1850.csv")
+bk_geo <- read_csv("Data/geo_dict_bk1850.csv")
 ```
 
 
 ## Morse
 
 ```{r}
-colnames(morse_mn) <- paste0("St", 0:(ncol(morse_mn)-1), sep = "")
-colnames(morse_mn)[1] <- "Ward"
-morse_mn_list<-gather(data = morse_mn, 
-             key = item, 
-             value = value, 
-             St1:St55)%>% #columns
-   select(-item)
+# colnames(morse_mn) <- paste0("St", 0:(ncol(morse_mn)-1), sep = "")
+# colnames(morse_mn)[1] <- "Ward"
+# morse_mn_list<-gather(data = morse_mn, 
+#              key = item, 
+#              value = value, 
+#              St1:St55)%>% #columns
+#    select(-item)
 ```
 ```{r}
-morse_mn_list<-na.omit(morse_mn_list)
-colnames(morse_mn_list)[2]<-"street"
-```
-```{r}
-morse_mn_list$source<-"morse"
-morse_mn_list$street<-trimws(morse_mn_list$street,"both")
+# morse_mn_list<-na.omit(morse_mn_list)
+# colnames(morse_mn_list)[2]<-"street"
+# ```
+# ```{r}
+# morse_mn_list$source<-"morse"
+# morse_mn_list$street<-trimws(morse_mn_list$street,"both")
 ```
 
 
 ```{r}
-colnames(morse_bk) <- paste0("St", 0:(ncol(morse_bk)-1), sep = "")
-colnames(morse_bk)[1] <- "Ward"
-morse_bk_list<-gather(data = morse_bk, 
-             key = item, 
-             value = value, 
-             St1:St59)%>% #columns
-   select(-item)
-```
-```{r}
-morse_bk_list<-na.omit(morse_bk_list)
-colnames(morse_bk_list)[2]<-"street"
-```
-```{r}
-morse_bk_list$source<-"morse"
-morse_bk_list$street<-trimws(morse_bk_list$street,"both")
+# colnames(morse_bk) <- paste0("St", 0:(ncol(morse_bk)-1), sep = "")
+# colnames(morse_bk)[1] <- "Ward"
+# morse_bk_list<-gather(data = morse_bk, 
+#              key = item, 
+#              value = value, 
+#              St1:St59)%>% #columns
+#    select(-item)
+# ```
+# ```{r}
+# morse_bk_list<-na.omit(morse_bk_list)
+# colnames(morse_bk_list)[2]<-"street"
+# ```
+# ```{r}
+# morse_bk_list$source<-"morse"
+# morse_bk_list$street<-trimws(morse_bk_list$street,"both")
 ```
 
+```{r}
+mn_geo
+```
 
 ## geo dict
 ```{r}
@@ -84,18 +87,28 @@ colnames(mn_geo)[1] <- "Ward"
 mn_geo_list<-gather(data = mn_geo, 
              key = item, 
              value = value, 
-             St1:St27)%>%
+             St1:St164)%>%
    select(-item)
 ```
 ```{r}
 mn_geo_list<-na.omit(mn_geo_list)
 colnames(mn_geo_list)[2]<-"street"
 ```
+
 ```{r}
-mn_geo_list$source<-"morse"
-mn_geo_list$street<-trimws(mn_geo_list$street,"both")
+head(mn_geo_list)
 ```
 
+```{r}
+mn_geo_list$source<-"geo"
+mn_geo_list$street<-trimws(mn_geo_list$street,"both")
+```
+```{r}
+head(mn_geo_list)
+```
+```{r}
+head(bk_geo)
+```
 
 ```{r}
 colnames(bk_geo) <- paste0("St", 0:(ncol(bk_geo)-1), sep = "")
@@ -103,39 +116,50 @@ colnames(bk_geo)[1] <- "Ward"
 bk_geo_list<-gather(data = bk_geo, 
              key = item, 
              value = value, 
-             St1:St58)%>%
+             St1:St86)%>%
    select(-item)
 ```
+
+```{r}
+head(bk_geo_list)
+```
+
 ```{r}
 bk_geo_list<-na.omit(bk_geo_list)
 colnames(bk_geo_list)[2]<-"street"
 ```
 ```{r}
-bk_geo_list$source<-"morse"
+bk_geo_list$source<-"geo"
 bk_geo_list$street<-trimws(bk_geo_list$street,"both")
+```
+
+```{r}
+head(mn_geo_list)
+head(bk_geo_list)
 ```
 
 # check missing ED
 
 ```{r}
-#left join 
-missing_MN <- left_join(morse_mn_list, mn_geo_list, by = c("Ward","street"))
-missing_geo_mn <- missing_MN %>%
-  filter(is.na(source.y) == TRUE) %>%
-  select(-c(source.x, source.y))
+
+missing_MN <- mn_geo_list
+#missing_MN <- left_join(morse_mn_list, mn_geo_list, by = c("Ward","street"))
+missing_geo_mn <- missing_MN #%>%
+  #filter(is.na(source.y) == TRUE) %>% 
+  #select(-c(source.x, source.y))
 ```
 
 ```{r}
-#left join 
-missing_BK <- left_join(morse_bk_list, bk_geo_list, by = c("Ward","street"))
-missing_geo_bk <- missing_BK %>%
-  filter(is.na(source.y) == TRUE) %>%
-  select(-c(source.x, source.y))
+missing_BK <- bk_geo_list
+#missing_BK <- left_join(morse_bk_list, bk_geo_list, by = c("Ward","street"))
+missing_geo_bk <- missing_BK # %>%
+  #filter(is.na(source.y) == TRUE) %>%
+  #select(-c(source.x, source.y))
 ```
 
 ```{r}
-write_csv(missing_geo_mn, "Data/missing_EDs_mn.csv")
-write_csv(missing_geo_bk, "Data/missing_EDs_bk.csv")
+write_csv(missing_geo_mn, "Data/missing_EDs_mn1850.csv")
+write_csv(missing_geo_bk, "Data/missing_EDs_bk1850.csv")
 ```
 
 

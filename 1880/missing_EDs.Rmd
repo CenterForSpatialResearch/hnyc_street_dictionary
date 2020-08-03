@@ -32,12 +32,13 @@ morse_mn <- read_csv("Data/morse_mn1880.csv")
 morse_bk <- read_csv("Data/morse_bk1880.csv")
 ```
 ```{r}
-mn_geo <- read_csv("Data/geo_dict_mn.csv")
-bk_geo <- read_csv("Data/geo_dict_bk.csv")
+mn_geo <- read_csv("Data/geo_dict_mn1880.csv")
+bk_geo <- read_csv("Data/geo_dict_bk1880.csv")
 ```
 
 ```{r}
-#head(morse_mn)
+head(morse_mn)
+head(morse_bk)
 ```
 
 
@@ -81,7 +82,7 @@ morse_bk_list$street<-trimws(morse_bk_list$street,"both")
 ```
 
 ```{r}
-#head(mn_geo)
+head(mn_geo)
 ```
 
 
@@ -92,7 +93,7 @@ colnames(mn_geo)[1] <- "ED"
 mn_geo_list<-gather(data = mn_geo, 
              key = item, 
              value = value, 
-             St1:St32)%>%
+             St1:St80)%>%
    select(-item)
 ```
 ```{r}
@@ -105,7 +106,7 @@ mn_geo_list$street<-trimws(mn_geo_list$street,"both")
 ```
 
 ```{r}
-#head(bk_geo)
+head(bk_geo)
 ```
 
 
@@ -146,8 +147,8 @@ missing_geo_bk <- missing_BK %>%
 ```
 
 ```{r}
-write_csv(missing_geo_mn, "Data/missing_EDs_mn.csv")
-write_csv(missing_geo_bk, "Data/missing_EDs_bk.csv")
+write_csv(missing_geo_mn, "Data/missing_EDs_mn1880.csv")
+write_csv(missing_geo_bk, "Data/missing_EDs_bk1880.csv")
 ```
 
 

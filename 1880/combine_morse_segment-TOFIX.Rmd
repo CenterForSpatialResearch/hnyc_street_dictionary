@@ -33,8 +33,8 @@ morse_mn <- read_csv("Data/morse_mn1880.csv")
 morse_bk <- read_csv("Data/morse_bk1880.csv")
 ```
 ```{r}
-mn_seg <- read_csv("Data/segment_mn.csv")
-bk_seg <- read_csv("Data/segment_bk.csv")
+mn_seg <- read_csv("Data/segment_mn1880.csv")
+bk_seg <- read_csv("Data/segment_bk1880.csv")
 ```
 
 ## rearrange Morse data
@@ -164,8 +164,9 @@ class(df1)
 ```{r}
 combine_mn <- df1 %>% 
   rowwise() %>%
-  mutate(st_type = street_type_builder((Name))) %>%     # original
+  #mutate(st_type = street_type_builder(Name)) %>%     # original
   
+  mutate(st_type = street_type_builder(Name)) %>%
   #mutate(st_type = street_type_builder(select=c(Name))) %>%
   #mutate(st_type = street_type_builder(combine_mn[,2])) %>%
   ungroup()
@@ -191,8 +192,8 @@ combine_bk$source <- as.factor(combine_bk$source)
 
 # write data
 ```{r}
-write_csv(combine_mn, "Data/combine_mn.csv")
-write_csv(combine_bk, "Data/combine_bk.csv")
+write_csv(combine_mn, "Data/combine_mn1880.csv")
+write_csv(combine_bk, "Data/combine_bk1880.csv")
 ```
 
 

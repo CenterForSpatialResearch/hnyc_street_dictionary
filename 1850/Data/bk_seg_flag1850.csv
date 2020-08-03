@@ -1,4 +1,4 @@
-ED,JoinId,Name,Full_Name,Name1850,AltName,Left_Low,Left_High,Right_Low,Right_High,ObjectID,source,flag
+Ward,JoinId,Name,Full_Name,Name1850,AltName,Left_Low,Left_High,Right_Low,Right_High,ObjectID,source,flag
 10,G00000001,NA,SCHERMERHORN,NA,NA,NA,NA,NA,NA,1,geo,IN
 7,G00000002,NA,WALWORTH,NA,NA,NA,NA,NA,NA,2,geo,IN
 8,G00000033,NA,W PROSPECT,NA,NA,NA,NA,NA,NA,33,geo,IN

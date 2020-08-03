@@ -1,0 +1,822 @@
+Ward,street,source
+1,ALBANY,geo
+2,ANN,geo
+3,BARCLAY,geo
+4,CATHERINE,geo
+5,BEACH,geo
+6,BAXTER,geo
+7,CANAL,geo
+8,BROADWAY,geo
+9,10 AVE,geo
+10,ALLEN,geo
+11,ATTORNEY,geo
+12,1 AVE,geo
+13,ABRAHAM KAZAN,geo
+14,BAXTER,geo
+15,4 AVE,geo
+16,10 AVE,geo
+17,1 AVE,geo
+18,1 AVE,geo
+19,1 AVE,geo
+1,BEAVER,geo
+2,BEEKMAN,geo
+3,BROADWAY,geo
+4,CATHERINE SLIP,geo
+5,BROADWAY,geo
+6,BAYARD,geo
+7,CATHERINE,geo
+8,BROOME,geo
+9,6 AVE,geo
+10,BOWERY,geo
+11,AVE B,geo
+12,10 AVE,geo
+13,ATTORNEY,geo
+14,BOWERY,geo
+15,5 AVE,geo
+16,11 AVE,geo
+17,2 AVE,geo
+18,2 AVE,geo
+19,10 AVE,geo
+1,BRG,geo
+2,BROADWAY,geo
+3,CHAMBERS,geo
+4,DOVERS,geo
+5,CANAL,geo
+6,BENSON PL,geo
+7,CATHERINE SLIP,geo
+8,CANAL,geo
+9,7 AVE,geo
+10,BROOME,geo
+11,AVE C,geo
+12,12 AVE,geo
+13,BARUCH DR,geo
+14,BROADWAY,geo
+15,6 AVE,geo
+16,6 AVE,geo
+17,3 AVE,geo
+18,3 AVE,geo
+19,11 AVE,geo
+1,BROAD,geo
+2,CLIFF,geo
+3,CHURCH,geo
+4,FRONT,geo
+5,CHURCH,geo
+6,BOWERY,geo
+7,CHERRY,geo
+8,CHARLTON,geo
+9,8 AVE,geo
+10,CANAL,geo
+11,AVE D,geo
+12,2 AVE,geo
+13,BIALYSTOKER PL,geo
+14,BROOME,geo
+15,ASTOR PL,geo
+16,7 AVE,geo
+17,4 AVE,geo
+18,4 AVE,geo
+19,2 AVE,geo
+1,BROADWAY,geo
+2,DUTCH,geo
+3,CORTLANDT,geo
+4,GOLD,geo
+5,COLLISTER,geo
+6,BROADWAY,geo
+7,CLINTON,geo
+8,CLARK,geo
+9,9 AVE,geo
+10,CHRYSTIE,geo
+11,BARUCH DR,geo
+12,3 AVE,geo
+13,BROOME,geo
+14,CANAL,geo
+15,BLEECKER,geo
+16,8 AVE,geo
+17,ALLEN,geo
+18,5 AVE,geo
+19,3 AVE,geo
+1,CARLISLE,geo
+2,FLETCHER,geo
+3,DEY,geo
+4,HENRY,geo
+5,DESBROSSES,geo
+6,CANAL,geo
+7,DIVISION,geo
+8,DOMINICK,geo
+9,BANK,geo
+10,DELANCEY,geo
+11,BARUCH PL,geo
+12,5 AVE,geo
+13,CLINTON,geo
+14,CENTRE,geo
+15,BOND,geo
+16,9 AVE,geo
+17,AVE A,geo
+18,6 AVE,geo
+19,5 AVE,geo
+1,CEDAR,geo
+2,FRONT,geo
+3,FULTON,geo
+4,KIMLOW SQ,geo
+5,DUANE,geo
+6,CATHERINE LN,geo
+7,E BROADWAY,geo
+8,GRAND,geo
+9,BARROW,geo
+10,DIVISION,geo
+11,CLINTON,geo
+12,AMSTERDAM AVE,geo
+13,COLUMBIA,geo
+14,CENTRE MARKET PL,geo
+15,BOWERY,geo
+16,BROADWAY,geo
+17,AVE B,geo
+18,AVE A,geo
+19,6 AVE,geo
+1,COENTIES ALY,geo
+2,FULTON,geo
+3,GREENWICH,geo
+4,MADISON,geo
+5,ERICSSON PL,geo
+6,CENTRE,geo
+7,F D R DR,geo
+8,GREENE,geo
+9,BEDFORD,geo
+10,ELDRIDGE,geo
+11,COLUMBIA,geo
+12,BROADWAY,geo
+13,DELANCEY,geo
+14,CROSBY,geo
+15,BROADWAY,geo
+16,W 14,geo
+17,BOWERY,geo
+18,AVE B,geo
+19,7 AVE,geo
+1,COENTIES SLIP,geo
+2,GOLD,geo
+3,HUDSON,geo
+4,OLIVER,geo
+5,FRANKLIN,geo
+6,CORTLANDT ALY,geo
+7,GOUVERNEUR,geo
+8,GREENWICH,geo
+9,BETHUNE,geo
+10,ESSEX,geo
+11,E 10,geo
+12,C N P,geo
+13,F D R DR,geo
+14,ELIZABETH,geo
+15,CARMINE,geo
+16,W 15,geo
+17,CHRYSTIE,geo
+18,BROADWAY,geo
+19,8 AVE,geo
+1,EDGAR,geo
+2,JOHN,geo
+3,LIBERTY,geo
+4,PARK ROW,geo
+5,FRANKLIN PL,geo
+6,DOYERS,geo
+7,GOUVERNEUR E SLIP,geo
+8,HOWARD,geo
+9,BLEECKER,geo
+10,FORSYTH,geo
+11,E 11,geo
+12,C W P,geo
+13,GRAND,geo
+14,GRAND,geo
+15,COOPER SQ,geo
+16,W 16,geo
+17,CLINTON,geo
+18,BROADWAY ALY,geo
+19,9 AVE,geo
+1,EXCHANGE ALY,geo
+2,LIBERTY,geo
+3,MURRAY,geo
+4,PEARL,geo
+5,GREENWICH,geo
+6,DUANE,geo
+7,GOUVERNEUR W SLIP,geo
+8,HUDSON,geo
+9,CARMINE,geo
+10,GRAND,geo
+11,E 12,geo
+12,COLUMBUS AVE,geo
+13,LEWIS,geo
+14,HESTER,geo
+15,E 10,geo
+16,W 17,geo
+17,COOPER SQ,geo
+18,E 14,geo
+19,AMSTERDAM AVE,geo
+1,EXCHANGE PL,geo
+2,LIBERTY PL,geo
+3,PARK PL,geo
+4,PECK SLIP,geo
+5,HARRISON,geo
+6,ELIZABETH,geo
+7,GRAND,geo
+8,KING,geo
+9,CHARLES,geo
+10,HESTER,geo
+11,E 13,geo
+12,DONNELLON SQ,geo
+13,NORFOLK,geo
+14,HOWARD,geo
+15,E 11,geo
+16,W 18,geo
+17,E 1,geo
+18,E 15,geo
+19,BROADWAY,geo
+1,FRONT,geo
+2,MAIDEN LN,geo
+3,READE,geo
+4,ROSE,geo
+5,HUBERT,geo
+6,ELK,geo
+7,HENRY,geo
+8,MAC DOUGAL,geo
+9,CHARLES LN,geo
+10,LUDLOW,geo
+11,E 14,geo
+12,E 100,geo
+13,PITT,geo
+14,LAFAYETTE,geo
+15,E 12,geo
+16,W 19,geo
+17,E 10,geo
+18,E 16,geo
+19,C S P,geo
+1,GOUVERNEUR LN,geo
+2,NASSAU,geo
+3,VESEY,geo
+4,SOUTH,geo
+5,HUDSON,geo
+6,FRANK HOGAN PL,geo
+7,JACKSON,geo
+8,MERCER,geo
+9,CHRISTOPHER,geo
+10,NORFOLK,geo
+11,E 2,geo
+12,E 101,geo
+13,RIDGE,geo
+14,MOTT,geo
+15,E 13,geo
+16,W 20,geo
+17,E 11,geo
+18,E 17,geo
+19,C W P,geo
+1,GREENWICH,geo
+2,PARK ROW,geo
+3,W BROADWAY,geo
+4,SPRUCE,geo
+5,JAY,geo
+6,FRANKLIN,geo
+7,JEFFERSON,geo
+8,PRINCE,geo
+9,CLARKSON,geo
+10,ORCHARD,geo
+11,E 3,geo
+12,E 102,geo
+13,RIVINGTON,geo
+14,MULBERRY,geo
+15,E 14,geo
+16,W 21,geo
+17,E 12,geo
+18,E 18,geo
+19,COLUMBUS AVE,geo
+1,HANOVER,geo
+2,PEARL,geo
+3,WARREN,geo
+4,WATER,geo
+5,LAIGHT,geo
+6,KIMLOW SQ,geo
+7,MADISON,geo
+8,RENWICK,geo
+9,COMMERCE,geo
+10,RIVINGTON,geo
+11,E 4,geo
+12,E 103,geo
+13,SUFFOLK,geo
+14,PRINCE,geo
+15,E 4,geo
+16,W 22,geo
+17,E 13,geo
+18,E 19,geo
+19,E 40,geo
+1,HANOVER SQ,geo
+2,PECK SLIP,geo
+3,WASHINGTON,geo
+4,WORTH,geo
+5,LEONARD,geo
+6,LAFAYETTE,geo
+7,MARKET,geo
+8,SPRING,geo
+9,CORNELIA,geo
+11,E 5,geo
+12,E 104,geo
+14,SPRING,geo
+15,E 8,geo
+16,W 23,geo
+17,E 14,geo
+18,E 20,geo
+19,E 41,geo
+1,LIBERTY,geo
+2,PLATT,geo
+3,WEST,geo
+5,LISPENARD,geo
+6,LEONARD,geo
+7,MARKET SLIP,geo
+8,SULLIVAN,geo
+9,DOWNING,geo
+11,E 6,geo
+12,E 105,geo
+15,E 9,geo
+16,W 24,geo
+17,E 2,geo
+18,E 21,geo
+19,E 42,geo
+1,MAIDEN LN,geo
+2,RYDERS ALY,geo
+5,N MOORE,geo
+6,MOSCO,geo
+7,MONROE,geo
+8,THOMPSON,geo
+9,GANSEVOORT,geo
+11,E 7,geo
+12,E 106,geo
+15,ELIZABETH,geo
+16,W 25,geo
+17,E 3,geo
+18,E 22,geo
+19,E 43,geo
+1,MILL LN,geo
+2,SOUTH,geo
+5,READE,geo
+6,MOTT,geo
+7,MONTGOMERY,geo
+8,VANDAM,geo
+9,GAY,geo
+11,E 8,geo
+12,E 107,geo
+15,GREAT JONES,geo
+16,W 26,geo
+17,E 4,geo
+18,E 23,geo
+19,E 44,geo
+1,MOORE,geo
+2,SPRUCE,geo
+5,SAINT JOHNS LN,geo
+6,MULBERRY,geo
+7,PIKE,geo
+8,VARICK,geo
+9,GREENWICH,geo
+11,E 9,geo
+12,E 108,geo
+15,GREAT JONES ALY,geo
+16,W 27,geo
+17,E 5,geo
+18,E 24,geo
+19,E 45,geo
+1,MORRIS,geo
+2,THEATRE ALY,geo
+5,STAPLE,geo
+6,PARK ROW,geo
+7,PIKE SLIP,geo
+8,W BROADWAY,geo
+9,GREENWICH AVE,geo
+11,E HOUSTON,geo
+12,E 109,geo
+15,GREENE,geo
+16,W 28,geo
+17,E 6,geo
+18,E 25,geo
+19,E 46,geo
+1,NASSAU,geo
+2,WATER,geo
+5,THOMAS,geo
+6,PEARL,geo
+7,RUTGERS,geo
+8,W HOUSTON,geo
+9,GROVE,geo
+11,L WALD,geo
+12,E 110,geo
+15,LAFAYETTE,geo
+16,W 29,geo
+17,E 7,geo
+18,E 26,geo
+19,E 47,geo
+1,NEW,geo
+2,WILLIAM,geo
+5,VARICK,geo
+6,PELL,geo
+7,RUTGERS PL,geo
+8,WASHINGTON,geo
+9,HORATIO,geo
+11,MANGIN,geo
+12,E 111,geo
+15,LAGUARDIA PL,geo
+16,W 30,geo
+17,E 8,geo
+18,E 27,geo
+19,E 48,geo
+1,OLD SLIP,geo
+5,VESTRY,geo
+6,READE,geo
+7,SOUTH,geo
+8,WATTS,geo
+9,HUDSON,geo
+11,PITT,geo
+12,E 112,geo
+15,MAC DOUGAL,geo
+16,W 31,geo
+17,E 9,geo
+18,E 28,geo
+19,E 49,geo
+1,PEARL,geo
+5,W BROADWAY,geo
+6,SAINT ANDREWS PLZ,geo
+7,WATER,geo
+8,WEST,geo
+9,JANE,geo
+11,RIDGE,geo
+12,E 113,geo
+15,MAC DOUGAL ALY,geo
+16,W 32,geo
+17,E HOUSTON,geo
+18,E 29,geo
+19,E 50,geo
+1,PINE,geo
+5,WALKER,geo
+6,WALKER,geo
+8,WOOSTER,geo
+9,JONES,geo
+11,RIVINGTON,geo
+12,E 114,geo
+15,MERCER,geo
+16,W 33,geo
+17,ELDRIDGE,geo
+18,E 30,geo
+19,E 51,geo
+1,RECTOR,geo
+5,WASHINGTON,geo
+6,WHITE,geo
+9,LEROY,geo
+11,SHERIFF,geo
+12,E 115,geo
+15,MINETTA,geo
+16,W 34,geo
+17,ESSEX,geo
+18,E 31,geo
+19,E 52,geo
+1,S WILLIAM,geo
+5,WATTS,geo
+6,WORTH,geo
+9,MORTON,geo
+11,STANTON,geo
+12,E 116,geo
+15,MINETTA LN,geo
+16,W 35,geo
+17,EXTRA PL,geo
+18,E 32,geo
+19,E 53,geo
+1,SOUTH,geo
+5,WEST,geo
+9,PATCHIN PL,geo
+11,SZOLD PL,geo
+12,E 117,geo
+15,MOTT,geo
+16,W 36,geo
+17,FORSYTH,geo
+18,E 33,geo
+19,E 54,geo
+1,STATE,geo
+5,WHITE,geo
+9,PERRY,geo
+12,E 118,geo
+15,MULBERRY,geo
+16,W 37,geo
+17,LAFAYETTE CT,geo
+18,E 34,geo
+19,E 55,geo
+1,STONE,geo
+5,WORTH,geo
+9,SAINT LUKES PL,geo
+12,E 119,geo
+15,SHINBONE ALY,geo
+16,W 38,geo
+17,LUDLOW,geo
+18,E 35,geo
+19,E 56,geo
+1,THAMES,geo
+5,YORK,geo
+9,VARICK,geo
+12,E 120,geo
+15,SULLIVAN,geo
+16,W 39,geo
+17,NORFOLK,geo
+18,E 36,geo
+19,E 57,geo
+1,WALL,geo
+9,W 10,geo
+12,E 121,geo
+15,THOMPSON,geo
+16,W 40,geo
+17,ORCHARD,geo
+18,E 37,geo
+19,E 58,geo
+1,WASHINGTON,geo
+9,W 11,geo
+12,E 122,geo
+15,UNIVERSITY PL,geo
+17,RIVINGTON,geo
+18,E 38,geo
+19,E 59,geo
+1,WATER,geo
+9,W 12,geo
+12,E 123,geo
+15,W 10,geo
+17,SAINT MARKS PL,geo
+18,E 39,geo
+19,E 60,geo
+1,WEST,geo
+9,W 13,geo
+12,E 124,geo
+15,W 11,geo
+17,STANTON,geo
+18,E 40,geo
+19,E 61,geo
+1,WHITEHALL,geo
+9,W 14,geo
+12,E 125,geo
+15,W 12,geo
+17,STUYVESANT,geo
+18,GRAMERCY E PARK,geo
+19,E 62,geo
+1,WILLIAM,geo
+9,W 4,geo
+12,E 126,geo
+15,W 13,geo
+17,SUFFOLK,geo
+18,GRAMERCY N PARK,geo
+19,E 63,geo
+9,W HOUSTON,geo
+12,E 127,geo
+15,W 14,geo
+17,T SHEVCHENKO PL,geo
+18,GRAMERCY S PARK,geo
+19,E 64,geo
+9,W LITTLE 12,geo
+12,E 128,geo
+15,W 3,geo
+18,GRAMERCY W PARK,geo
+19,E 65,geo
+9,W WASHINGTON PL,geo
+12,E 129,geo
+15,W 4,geo
+18,IRVING PL,geo
+19,E 66,geo
+9,WASHINGTON,geo
+12,E 130,geo
+15,W 8,geo
+18,LEX AVE,geo
+19,E 67,geo
+9,WAVERLY PL,geo
+12,E 131,geo
+15,W 9,geo
+18,MADISON AVE,geo
+19,E 68,geo
+9,WEEHAWKEN,geo
+12,E 86,geo
+15,W HOUSTON,geo
+18,NATHAN D PERLMAN PL,geo
+19,E 69,geo
+9,WEST,geo
+12,E 87,geo
+15,W WASHINGTON PL,geo
+18,PARK AVE,geo
+19,E 70,geo
+12,E 88,geo
+15,WANAMAKER PL,geo
+18,PARK AVE S,geo
+19,E 71,geo
+12,E 89,geo
+15,WASHINGTON E SQ,geo
+18,RUTHERFORD PL,geo
+19,E 72,geo
+12,E 90,geo
+15,WASHINGTON MEWS,geo
+18,UNION E SQ,geo
+19,E 73,geo
+12,E 91,geo
+15,WASHINGTON N SQ,geo
+18,UNION W SQ,geo
+19,E 74,geo
+12,E 92,geo
+15,WASHINGTON PL,geo
+18,W 14,geo
+19,E 75,geo
+12,E 93,geo
+15,WASHINGTON W SQ,geo
+18,W 15,geo
+19,E 76,geo
+12,E 94,geo
+15,WAVERLY PL,geo
+18,W 16,geo
+19,E 77,geo
+12,E 95,geo
+18,W 17,geo
+19,E 78,geo
+12,E 96,geo
+18,W 18,geo
+19,E 79,geo
+12,E 97,geo
+18,W 19,geo
+19,E 80,geo
+12,E 98,geo
+18,W 20,geo
+19,E 81,geo
+12,E 99,geo
+18,W 21,geo
+19,E 82,geo
+12,E END AVE,geo
+18,W 22,geo
+19,E 83,geo
+12,ESPLANADE GD PLZ,geo
+18,W 23,geo
+19,E 84,geo
+12,F DOUGLAS BLVD,geo
+18,W 24,geo
+19,E 85,geo
+12,HAMILTON PL,geo
+18,W 25,geo
+19,E 86,geo
+12,LENOX AVE,geo
+18,W 26,geo
+19,E END AVE,geo
+12,MACOMBS PL,geo
+18,W 27,geo
+19,LEX AVE,geo
+12,MADISON AVE,geo
+18,W 28,geo
+19,MADISON AVE,geo
+12,MORNINGSIDE AVE,geo
+18,W 29,geo
+19,PARK AVE,geo
+12,MOUNT MORRIS W PARK,geo
+18,W 30,geo
+19,SUTTON N PL,geo
+12,OLD BROADWAY,geo
+18,W 31,geo
+19,SUTTON S PL,geo
+12,PARK AVE,geo
+18,W 32,geo
+19,SUTTON SQ,geo
+12,PLEASANT AVE,geo
+18,W 33,geo
+19,W 40,geo
+12,SAINT NICHOLAS AVE,geo
+18,W 34,geo
+19,W 41,geo
+12,SAINT NICHOLAS PL,geo
+18,W 35,geo
+19,W 42,geo
+12,W 108,geo
+18,W 36,geo
+19,W 43,geo
+12,W 109,geo
+18,W 37,geo
+19,W 44,geo
+12,W 111,geo
+18,W 38,geo
+19,W 45,geo
+12,W 112,geo
+18,W 39,geo
+19,W 46,geo
+12,W 113,geo
+18,W 40,geo
+19,W 47,geo
+12,W 114,geo
+19,W 48,geo
+12,W 115,geo
+19,W 49,geo
+12,W 116,geo
+19,W 50,geo
+12,W 117,geo
+19,W 51,geo
+12,W 118,geo
+19,W 52,geo
+12,W 119,geo
+19,W 53,geo
+12,W 120,geo
+19,W 54,geo
+12,W 121,geo
+19,W 55,geo
+12,W 122,geo
+19,W 56,geo
+12,W 123,geo
+19,W 57,geo
+12,W 124,geo
+19,W 58,geo
+12,W 125,geo
+19,W 59,geo
+12,W 126,geo
+19,W 60,geo
+12,W 127,geo
+19,W 61,geo
+12,W 128,geo
+19,W 62,geo
+12,W 129,geo
+19,W 64,geo
+12,W 130,geo
+19,W 65,geo
+12,W 131,geo
+19,W 66,geo
+12,W 132,geo
+19,W 67,geo
+12,W 133,geo
+19,W 68,geo
+12,W 134,geo
+19,W 69,geo
+12,W 135,geo
+19,W 70,geo
+12,W 138,geo
+19,W 71,geo
+12,W 139,geo
+19,W 72,geo
+12,W 140,geo
+19,W 73,geo
+12,W 141,geo
+19,W 74,geo
+12,W 142,geo
+19,W 75,geo
+12,W 143,geo
+19,W 76,geo
+12,W 150,geo
+19,W 77,geo
+12,W 151,geo
+19,W 78,geo
+12,W 152,geo
+19,W 79,geo
+12,W 153,geo
+19,W 80,geo
+12,W 154,geo
+19,W 82,geo
+12,W 155,geo
+19,W 83,geo
+12,W 156,geo
+19,W 84,geo
+12,W 157,geo
+19,W 85,geo
+12,W 158,geo
+19,W END AVE,geo
+12,W 159,geo
+19,YORK AVE,geo
+12,W 160,geo
+12,W 161,geo
+12,W 163,geo
+12,W 164,geo
+12,W 165,geo
+12,W 168,geo
+12,W 169,geo
+12,W 170,geo
+12,W 171,geo
+12,W 172,geo
+12,W 173,geo
+12,W 175,geo
+12,W 176,geo
+12,W 177,geo
+12,W 178,geo
+12,W 179,geo
+12,W 180,geo
+12,W 181,geo
+12,W 182,geo
+12,W 183,geo
+12,W 184,geo
+12,W 185,geo
+12,W 187,geo
+12,W 202,geo
+12,W 203,geo
+12,W 205,geo
+12,W 206,geo
+12,W 207,geo
+12,W 211,geo
+12,W 212,geo
+12,W 213,geo
+12,W 214,geo
+12,W 215,geo
+12,W 216,geo
+12,W 87,geo
+12,W 88,geo
+12,W 89,geo
+12,W 90,geo
+12,W 91,geo
+12,W 92,geo
+12,W 93,geo
+12,W 94,geo
+12,W 95,geo
+12,W 96,geo
+12,W 97,geo
+12,W 98,geo
+12,W 99,geo
+12,W END AVE,geo
+12,YORK AVE,geo
