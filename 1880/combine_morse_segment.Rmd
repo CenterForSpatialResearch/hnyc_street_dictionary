@@ -155,39 +155,105 @@ combine_bk
 source("lib/st_type2.R")
 ```
 
-# FIX HERE!
 ```{r}
 df1 <- as.data.frame(combine_mn) 
-head(df1)
-class(df1)
+
 ```
+
 ```{r}
 combine_mn <- df1 %>% 
-  rowwise() %>%
-  #mutate(st_type = street_type_builder(Name)) %>%     # original
+  rowwise()
+
+street_type_builder = function(df1) {
+  df1$street_type = case_when(
+    str_detect(df1$Name, pattern = " ST") ~ "ST",
+    str_detect(df1$Name, pattern = " DR") ~ "DR",
+    str_detect(df1$Name, pattern = " CIR") ~ "CIR",
+    str_detect(df1$Name, pattern = " AVE") ~ "AVE",
+    str_detect(df1$Name, pattern = " PL") ~ "PL",
+    str_detect(df1$Name, pattern = " CT") ~ "CT",
+    str_detect(df1$Name, pattern = " PARK") ~ "PARK",
+    str_detect(df1$Name, pattern = " PLZ") ~ "PLZ",
+    str_detect(df1$Name, pattern = " PKWY") ~ "PKWY",
+    str_detect(df1$Name, pattern = " WAY") ~ "WAY",
+    str_detect(df1$Name, pattern = " ALY") ~ "ALY",
+    str_detect(df1$Name, pattern = " PIER") ~ "PIER",
+    str_detect(df1$Name, pattern = "PIER") ~ "PIER",
+    str_detect(df1$Name, pattern = " SLIP") ~ "SLIP",
+    str_detect(df1$Name, pattern = " ROW") ~ "ROW",
+    str_detect(df1$Name, pattern = " APPROACH") ~ "APPROACH",
+    str_detect(df1$Name, pattern = " LN") ~ "LN",
+    str_detect(df1$Name, pattern = " TER") ~ "TER",
+    str_detect(df1$Name, pattern = " HTS") ~ "HTS",
+    str_detect(df1$Name, pattern = " BLVD") ~ "BLVD",
+    str_detect(df1$Name, pattern = " BRG") ~ "BRG",
+    str_detect(df1$Name, pattern = " HL") ~ "HL",
+    str_detect(df1$Name, pattern = "AVE") ~ "AVE",
+    str_detect(df1$Name, pattern = "BROADWAY") ~ "AVE",
+    TRUE ~ "ST")
   
-  mutate(st_type = street_type_builder(Name)) %>%
-  #mutate(st_type = street_type_builder(select=c(Name))) %>%
-  #mutate(st_type = street_type_builder(combine_mn[,2])) %>%
+  return(df1)
+}
+
+combine_mn = street_type_builder(combine_mn)
+
+```
+
+```{r}
+combine_mn <- combine_mn %>%
   ungroup()
+head(combine_mn)
+```
 
+
+```{r} 
+df2 <- as.data.frame(combine_bk) 
 ```
 
 ```{r}
-combine_bk <- combine_bk %>% rowwise() %>%
-  mutate(st_type = type(Name)) %>%
+combine_bk <- df2 %>% 
+  rowwise()
+
+street_type_builder = function(df2) {
+  df2$street_type = case_when(
+    str_detect(df2$Name, pattern = " ST") ~ "ST",
+    str_detect(df2$Name, pattern = " DR") ~ "DR",
+    str_detect(df2$Name, pattern = " CIR") ~ "CIR",
+    str_detect(df2$Name, pattern = " AVE") ~ "AVE",
+    str_detect(df2$Name, pattern = " PL") ~ "PL",
+    str_detect(df2$Name, pattern = " CT") ~ "CT",
+    str_detect(df2$Name, pattern = " PARK") ~ "PARK",
+    str_detect(df2$Name, pattern = " PLZ") ~ "PLZ",
+    str_detect(df2$Name, pattern = " PKWY") ~ "PKWY",
+    str_detect(df2$Name, pattern = " WAY") ~ "WAY",
+    str_detect(df2$Name, pattern = " ALY") ~ "ALY",
+    str_detect(df2$Name, pattern = " PIER") ~ "PIER",
+    str_detect(df2$Name, pattern = "PIER") ~ "PIER",
+    str_detect(df2$Name, pattern = " SLIP") ~ "SLIP",
+    str_detect(df2$Name, pattern = " ROW") ~ "ROW",
+    str_detect(df2$Name, pattern = " APPROACH") ~ "APPROACH",
+    str_detect(df2$Name, pattern = " LN") ~ "LN",
+    str_detect(df2$Name, pattern = " TER") ~ "TER",
+    str_detect(df2$Name, pattern = " HTS") ~ "HTS",
+    str_detect(df2$Name, pattern = " BLVD") ~ "BLVD",
+    str_detect(df2$Name, pattern = " BRG") ~ "BRG",
+    str_detect(df2$Name, pattern = " HL") ~ "HL",
+    str_detect(df2$Name, pattern = "AVE") ~ "AVE",
+    str_detect(df2$Name, pattern = "BROADWAY") ~ "AVE",
+    TRUE ~ "ST")
+  
+  return(df2)
+}
+
+combine_bk = street_type_builder(combine_bk)
+```
+
+```{r}
+combine_bk <- combine_bk %>%
   ungroup()
+head(combine_mn)
 ```
 
-## change to factore
-```{r}
-combine_mn$st_type <- as.factor(combine_mn$st_type)
-combine_mn$source <- as.factor(combine_mn$source)
-```
-```{r}
-combine_bk$st_type <- as.factor(combine_bk$st_type)
-combine_bk$source <- as.factor(combine_bk$source)
-```
 
 
 # write data

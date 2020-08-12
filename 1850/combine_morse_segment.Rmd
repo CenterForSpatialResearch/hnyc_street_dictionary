@@ -1,0 +1,335 @@
+---
+title: "combine mprse and segment data"
+author: "Chang Xu"
+output: html_notebook
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(error = TRUE)
+knitr::opts_chunk$set(cache = F)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+options(mc.cores = parallel::detectCores())
+library(zoo)
+library(magrittr)
+library(dplyr)
+library(tidyverse)
+library(openxlsx)
+library(readxl)
+library(stringr)
+library(fuzzyjoin)
+library(tm)
+library(english)
+library(reshape2)
+library(gtools)
+library(compare)
+library(purrr)
+```
+
+## load data
+
+```{r}
+#morse_mn <- read_csv("Data/morse_mn1880.csv")
+#morse_bk <- read_csv("Data/morse_bk1880.csv")
+```
+```{r}
+mn_seg <- read_csv("Data/segment_mn1850.csv")
+bk_seg <- read_csv("Data/segment_bk1850.csv")
+```
+
+## rearrange Morse data
+```{r}
+# ## MN
+# colnames(morse_mn) <- gsub("Street", "St", colnames(morse_mn))
+# test <- morse_mn
+# test1 = test %>%
+#   gather(colnames(test)[-1], key = "StreetNum", value = "StreetName") 
+# mn_ed <- na.omit(test1) %>% select(ED, Name = StreetName)
+# ```
+# ```{r}
+# ## BK
+# colnames(morse_bk) <- gsub("Street", "St", colnames(morse_bk))
+# test <- morse_bk
+# test1 = test %>%
+#   gather(colnames(test)[-1], key = "StreetNum", value = "StreetName") 
+# bk_ed <- na.omit(test1) %>% select(ED, Name = StreetName)
+```
+
+## add source
+```{r}
+# mn_ed$source <- "Morse"
+# bk_ed$source <- "Morse"
+```
+
+## spread geo dict
+```{r}
+head(mn_seg)
+head(bk_seg)
+```
+
+```{r}
+mn_seg1 <- mn_seg %>% filter(Ward_Left == Ward_Right) %>% 
+  mutate(Ward = Ward_Left) %>% select(-Ward_Left, -Ward_Right)
+```
+```{r}
+mn_seg2 <- mn_seg %>% filter(Ward_Left != Ward_Right) %>% 
+  rename(Ward = Ward_Left) %>% select(-Ward_Right)
+```
+```{r}
+mn_seg3 <- mn_seg %>% filter(Ward_Left != Ward_Right) %>% 
+  rename(Ward = Ward_Right) %>% select(-Ward_Left)
+```
+
+```{r}
+mn_seg3
+```
+
+```{r}
+mn_seg4 <- rbind(mn_seg1, mn_seg2, mn_seg3)
+mn_seg4 <- mn_seg4[c(11, 10, 1:9)]
+```
+
+```{r}
+mn_seg4
+```
+
+
+```{r}
+bk_seg1 <- bk_seg %>% filter(Ward_Left == Ward_Right) %>% 
+  mutate(Ward = Ward_Left) %>% select(-Ward_Left, -Ward_Right)
+```
+```{r}
+bk_seg2 <- bk_seg %>% filter(Ward_Left != Ward_Right) %>% 
+  rename(Ward = Ward_Left) %>% select(-Ward_Right)
+```
+```{r}
+bk_seg3 <- bk_seg %>% filter(Ward_Left != Ward_Right) %>% 
+  rename(Ward = Ward_Right) %>% select(-Ward_Left)
+
+```
+
+```{r}
+bk_seg4 <- rbind(bk_seg1, bk_seg2, bk_seg3)
+bk_seg4 <- bk_seg4[c(11, 10, 1:9)]
+```
+
+```{r}
+bk_seg4
+```
+
+## add source
+```{r}
+mn_seg4$source <- "geo"
+bk_seg4$source <- "geo"
+```
+
+
+## combine with Morse
+```{r}
+#combine_mn <- full_join(mn_ed, mn_seg4, by = c("Ward", "Name"))
+#combine_bk <- full_join(bk_ed, bk_seg4, by = c("Ward", "Name"))
+combine_mn <- mn_seg4
+combine_bk <- bk_seg4
+```
+```{r}
+#head(combine_bk)
+#head(combine_mn)
+```
+
+## tidy source column
+```{r}
+combine_mn$source <- paste0(combine_mn$source.x, " ", combine_mn$source.y)
+combine_mn$source <- gsub("NA | NA", "", combine_mn$source)
+combine_bk$source <- paste0(combine_bk$source.x, " ", combine_bk$source.y)
+combine_bk$source <- gsub("NA | NA", "", combine_bk$source)
+combine_mn$source <- "geo"
+combine_bk$source <- "geo"
+```
+
+```{r}
+#combine_mn <- combine_mn %>% select(-source.x, -source.y)
+#combine_bk <- combine_bk %>% select(-source.x, -source.y)
+```
+
+## add street type
+```{r}
+source("lib/st_type2.R")
+```
+
+```{r}
+# combine_mn <- combine_mn %>% rowwise() %>%
+#   mutate(st_type = type(Name)) %>%
+#   ungroup()
+df1 <- as.data.frame(combine_mn) 
+
+```
+
+```{r}
+combine_mn <- df1 %>% 
+  rowwise()
+
+street_type_builder = function(df1) {
+  df1$street_type = case_when(
+    str_detect(df1$Full_Name, pattern = " ST") ~ "ST",
+    str_detect(df1$Full_Name, pattern = " DR") ~ "DR",
+    str_detect(df1$Full_Name, pattern = " CIR") ~ "CIR",
+    str_detect(df1$Full_Name, pattern = " AVE") ~ "AVE",
+    str_detect(df1$Full_Name, pattern = " PL") ~ "PL",
+    str_detect(df1$Full_Name, pattern = " CT") ~ "CT",
+    str_detect(df1$Full_Name, pattern = " PARK") ~ "PARK",
+    str_detect(df1$Full_Name, pattern = " PLZ") ~ "PLZ",
+    str_detect(df1$Full_Name, pattern = " PKWY") ~ "PKWY",
+    str_detect(df1$Full_Name, pattern = " WAY") ~ "WAY",
+    str_detect(df1$Full_Name, pattern = " ALY") ~ "ALY",
+    str_detect(df1$Full_Name, pattern = " PIER") ~ "PIER",
+    str_detect(df1$Full_Name, pattern = "PIER") ~ "PIER",
+    str_detect(df1$Full_Name, pattern = " SLIP") ~ "SLIP",
+    str_detect(df1$Full_Name, pattern = " ROW") ~ "ROW",
+    str_detect(df1$Full_Name, pattern = " APPROACH") ~ "APPROACH",
+    str_detect(df1$Full_Name, pattern = " LN") ~ "LN",
+    str_detect(df1$Full_Name, pattern = " TER") ~ "TER",
+    str_detect(df1$Full_Name, pattern = " HTS") ~ "HTS",
+    str_detect(df1$Full_Name, pattern = " BLVD") ~ "BLVD",
+    str_detect(df1$Full_Name, pattern = " BRG") ~ "BRG",
+    str_detect(df1$Full_Name, pattern = " HL") ~ "HL",
+    str_detect(df1$Full_Name, pattern = "AVE") ~ "AVE",
+    str_detect(df1$Full_Name, pattern = "BROADWAY") ~ "AVE",
+    
+    str_detect(df1$Name, pattern = " ST") ~ "ST",
+    str_detect(df1$Name, pattern = " DR") ~ "DR",
+    str_detect(df1$Name, pattern = " CIR") ~ "CIR",
+    str_detect(df1$Name, pattern = " AVE") ~ "AVE",
+    str_detect(df1$Name, pattern = " PL") ~ "PL",
+    str_detect(df1$Name, pattern = " CT") ~ "CT",
+    str_detect(df1$Name, pattern = " PARK") ~ "PARK",
+    str_detect(df1$Name, pattern = " PLZ") ~ "PLZ",
+    str_detect(df1$Name, pattern = " PKWY") ~ "PKWY",
+    str_detect(df1$Name, pattern = " WAY") ~ "WAY",
+    str_detect(df1$Name, pattern = " ALY") ~ "ALY",
+    str_detect(df1$Name, pattern = " PIER") ~ "PIER",
+    str_detect(df1$Name, pattern = "PIER") ~ "PIER",
+    str_detect(df1$Name, pattern = " SLIP") ~ "SLIP",
+    str_detect(df1$Name, pattern = " ROW") ~ "ROW",
+    str_detect(df1$Name, pattern = " APPROACH") ~ "APPROACH",
+    str_detect(df1$Name, pattern = " LN") ~ "LN",
+    str_detect(df1$Name, pattern = " TER") ~ "TER",
+    str_detect(df1$Name, pattern = " HTS") ~ "HTS",
+    str_detect(df1$Name, pattern = " BLVD") ~ "BLVD",
+    str_detect(df1$Name, pattern = " BRG") ~ "BRG",
+    str_detect(df1$Name, pattern = " HL") ~ "HL",
+    str_detect(df1$Name, pattern = "AVE") ~ "AVE",
+    str_detect(df1$Name, pattern = "BROADWAY") ~ "AVE",
+    TRUE ~ "ST")
+  
+  return(df1)
+}
+
+combine_mn = street_type_builder(combine_mn)
+
+```
+
+```{r}
+combine_mn <- combine_mn %>%
+  ungroup()
+head(combine_mn)
+```
+
+
+```{r}
+# combine_bk <- combine_bk %>% rowwise() %>%
+#   mutate(st_type = type(Name)) %>%
+#   ungroup()
+df2 <- as.data.frame(combine_bk) 
+```
+
+```{r}
+combine_bk <- df2 %>% 
+  rowwise()
+
+street_type_builder = function(df2) {
+  df2$street_type = case_when(
+    str_detect(df2$Full_Name, pattern = " ST") ~ "ST",
+    str_detect(df2$Full_Name, pattern = " DR") ~ "DR",
+    str_detect(df2$Full_Name, pattern = " CIR") ~ "CIR",
+    str_detect(df2$Full_Name, pattern = " AVE") ~ "AVE",
+    str_detect(df2$Full_Name, pattern = " PL") ~ "PL",
+    str_detect(df2$Full_Name, pattern = " CT") ~ "CT",
+    str_detect(df2$Full_Name, pattern = " PARK") ~ "PARK",
+    str_detect(df2$Full_Name, pattern = " PLZ") ~ "PLZ",
+    str_detect(df2$Full_Name, pattern = " PKWY") ~ "PKWY",
+    str_detect(df2$Full_Name, pattern = " WAY") ~ "WAY",
+    str_detect(df2$Full_Name, pattern = " ALY") ~ "ALY",
+    str_detect(df2$Full_Name, pattern = " PIER") ~ "PIER",
+    str_detect(df2$Full_Name, pattern = "PIER") ~ "PIER",
+    str_detect(df2$Full_Name, pattern = " SLIP") ~ "SLIP",
+    str_detect(df2$Full_Name, pattern = " ROW") ~ "ROW",
+    str_detect(df2$Full_Name, pattern = " APPROACH") ~ "APPROACH",
+    str_detect(df2$Full_Name, pattern = " LN") ~ "LN",
+    str_detect(df2$Full_Name, pattern = " TER") ~ "TER",
+    str_detect(df2$Full_Name, pattern = " HTS") ~ "HTS",
+    str_detect(df2$Full_Name, pattern = " BLVD") ~ "BLVD",
+    str_detect(df2$Full_Name, pattern = " BRG") ~ "BRG",
+    str_detect(df2$Full_Name, pattern = " HL") ~ "HL",
+    str_detect(df2$Full_Name, pattern = "AVE") ~ "AVE",
+    str_detect(df2$Full_Name, pattern = "BROADWAY") ~ "AVE",
+    TRUE ~ "ST")
+  
+  return(df2)
+}
+
+combine_bk = street_type_builder(combine_bk)
+```
+
+
+```{r}
+combine_bk <- combine_bk %>%
+  ungroup()
+head(combine_mn)
+```
+
+
+# write data
+```{r}
+write_csv(combine_mn, "Data/combine_mn1850.csv")
+write_csv(combine_bk, "Data/combine_bk1850.csv")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
