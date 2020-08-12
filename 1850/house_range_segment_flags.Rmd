@@ -130,6 +130,8 @@ write_csv(bk, "Data/bk_seg_flag1850.csv")
 ```{r}
 bkr <- bk %>% group_by(Ward, Name) %>% 
   summarise(Min = min(Left_Low, Right_Low), Max = max(Left_High, Right_High))
+
+bkr
 ```
 ```{r}
 write_csv(bkr, "Data/bk_seg_add_range1850.csv")
