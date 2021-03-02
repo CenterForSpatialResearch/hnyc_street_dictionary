@@ -1,4 +1,5 @@
-clean<-function(x){
+clean <- function(x){
+    x<-toupper(x)
     x<-gsub("\\<STREET\\>|\\<SRT\\>$|\\<SR\\>$\\<SRT\\>$|\\<STR\\>$|\\<SST\\>$|\\<SEET\\>$|\\<TREET\\>$|\\<SHEER\\>$|\\<SHEE\\>$|\\<STREE\\>$|\\<SREET\\>$|\\<REET\\>$|\\<STEE\\>$|\\<ST\\>$","ST",x)
     x<-gsub("\\<N\\>","N",x)
     x<-gsub("\\<S\\>","S",x)
@@ -7,7 +8,7 @@ clean<-function(x){
     x<-gsub("\\<DRIVE\\>|\\<DR\\>|\\<DV\\>|\\<DE\\>$|\\<DRV\\>|\\<DRI\\>|\\<DRIV\\>|\\<DRIE\\>","DR",x) 
     x<-gsub("\\<CIRCLE\\>|\\<CIR\\>|\\<CRL\\>|\\<CIRC\\>|\\<CR\\>|\\<CL\\>|\\<CIRCL\\>|\\<CICLE\\>","CIR",x)
     x<-gsub("\\<AVENUE\\>|\\<AVE\\>|\\<AV\\>|\\<AVN\\>|\\<AVEN\\>|\\<AVENU\\>","AVE",x)
-    x<-gsub("\\<COURT\\>|\\<CT\\>|\\<CRT\\>|\\<CTR\\>|\\<COUR\\>|\\<COT\\>|\\<CORT\\>","CT",x)
+    x<-gsub("(?<=\\s)COURT|CT|CRT|CRT|CTR|(?<=\\s)COUR|(?<=\\s)COT|(?<=\\s)CORT","CT",x, perl = TRUE)
     x<-gsub("\\<BOULEVARD\\>|\\<BLVD\\>|\\<BVLD\\>|\\<BV\\>|\\<BLD\\>|\\<BD\\>|\\<BL\\>|\\<BLV\\>","BLVD",x)
     x<-gsub("\\<ROAD\\>|\\<RD\\>|\\<RAD\\>|\\<ROD\\>","RD",x)
     x<-gsub("\\<ALLEY\\>|\\<ALY\\>|\\<AL\\>|\\<ALLY\\>|\\<ALEY\\>|\\<ALLE\\>|\\<AY\\>","ALY",x)
@@ -18,16 +19,15 @@ clean<-function(x){
     x<-gsub("\\<TERRACE\\>|\\<TER\\>|\\<TERR\\>|\\<TRC\\>|\\<TRCE\\>|\\<TR\\>","TER",x)
     x<-gsub("\\<PLAZA\\>|\\<PLZ\\>|\\<PLAZ\\>|\\<PZ\\>|\\<PLZA\\>","PLZ",x)
     x<-gsub("\\<LANE\\>|\\<LN\\>|\\<LNE\\>|\\<LAN\\>","LN",x)
-    x<-gsub("\\<BRIDGE\\>|\\<BRG\\>|\\<BRGD\\>|\\<BGE\\>","BRG",x)
+    #x<-gsub("\\<BRIDGE\\>|\\<BRG\\>|\\<BRGD\\>|\\<BGE\\>","BRG",x)
     x<-gsub("\\<HILL\\>|\\<HL\\>|\\<HLL\\>|\\<HIL\\>","HL",x)
     x<-gsub("\\<HEIGHTS\\>|\\<HTS\\>|\\<HT\\>|\\<HEIGHT\\>|\\<HEGHTS\\>|\\<HHT\\>|\\<HEIGT\\>","HTS",x) 
     x<-gsub("\\<SLP\\>|\\<SLEP\\>|\\<SLIIP\\>|\\<SLI\\>","SLIP",x)
     x<-gsub("\\<RON\\>|\\<RW\\>|\\<ROE\\>|\\<ROOW\\>","ROW",x)
-    x <- gsub("\\<SQUARE\\>", "SQ", x) # new 
+    x <- gsub("\\<SQUARE\\>", "SQ", x) 
     x<-gsub(".*\\((.*)\\).*", "\\1", x)
-    x<-gsub("\\<ST\\>","",x) # new remove streets
+    x<-gsub("(?<=\\s)(ST)","",x, perl = TRUE) #remove ST after space
     x<-gsub("\\d+\\ - *\\d*|\\d+\\ TO *\\d*|\\d+\\-\\d*","",x) #remove addresses
-    
     
     ## dealing with numbered streets
     x<-gsub("(\\d)(ST|ND|RD|TH)\\b", "\\1", x)
@@ -37,6 +37,8 @@ clean<-function(x){
     x<-gsub("-"," ",x)
     x <- gsub("\\\\", "", x) ##new
     x <- gsub("\\'", "", x) ## remove apostrophe
+    x <- gsub("\\.", "", x) ## remove period
+    x <- gsub("\\*", "", x) ##remove asterisk
     x<-gsub("&","AND",x)
     x<-gsub("\\<1ST\\>|\\b1\\b","1",x)
     x<-gsub("\\<2ND\\>|\\b2\\b","2",x)
@@ -47,7 +49,7 @@ clean<-function(x){
     x<-gsub("\\<7TH\\>|\\b7\\b","7",x)
     x<-gsub("\\<8TH\\>|\\b8\\b","8",x)
     x<-gsub("\\<9TH\\>|\\b9\\b","9",x)
-    #new
+    
     x<-gsub("\\<TENTH\\>|\\<10TH\\>|\\b10\\b","10",x)
     x<-gsub("\\<ELEVENTH\\>|\\<11TH\\>|\\b11\\b","11",x)
     x<-gsub("\\<TWELFTH\\>|\\<12TH\\>|\\b12\\b","12",x)
@@ -102,9 +104,12 @@ clean<-function(x){
     ## 4 W to W 4
     x <- gsub("(\\w+|\\d+)\\s(\\bN\\b|\\bW\\b|\\bS\\b|\\bE\\b)", "\\3\\2 \\1", x)
     
-    
-    ## AVE D
-    x <- gsub("(\\b[A-Z])\\s(AVE)", "\\3\\2 \\1", x)
+    # AVE after A-Z and Digits
+    x <- gsub("(AVE)\\s(\\b[A-Z])", "\\3\\2 \\1", x)
+    x <- gsub("(AVE)\\s(\\b\\d+)", "\\3\\2 \\1", x)
+    ## OLD APPROACH
+    # ## AVE D
+    # x <- gsub("(\\b[A-Z])\\s(AVE)", "\\3\\2 \\1", x)
     
     ###### ALL MANUAL CLEANING GOES BELOW HERE ######
     
@@ -227,6 +232,7 @@ clean<-function(x){
     x <- gsub("\\<WALLWORTH\\>","WALWORTH",x)
     x <- gsub("\\<WHIPPER\\>","WHIPPLE",x)
     x <- gsub("\\<WALLABANK\\>|\\<WALKABOUT\\>","WALLABOUT",x)
-    x <- gsub("\\<WASH\\>|\\<WASTEWATER\\>","WASHINGTON",x)
+    x <- gsub("\\<WASH\\>|\\<WASTEWATER\\>","WASHINGTON",x) 
     
+    x <- gsub("\\<&\\>", "", x)
 }
